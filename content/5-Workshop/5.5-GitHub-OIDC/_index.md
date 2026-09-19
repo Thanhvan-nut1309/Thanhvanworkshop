@@ -33,7 +33,7 @@ Authenticate **GitHub Actions** to AWS using **OIDC**—no long-lived `AWS_ACCES
   "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
 },
 "StringLike": {
-  "token.actions.githubusercontent.com:sub": "repo:Nothingtoread/fighting-game:*"
+  "token.actions.githubusercontent.com:sub": "repo:Thanhvan-nut1309/ThanhVanWorkshop:*"
 }
 ```
 

@@ -6,32 +6,18 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-**Trong trang này** là nhật ký công việc thực tập **First Cloud AI Journey (FCAJ)** tại **Công ty TNHH Amazon Web Services Việt Nam**. Thời gian thực tập **12 tuần** từ **05/05/2026** đến **29/07/2026**, bao gồm kiến thức AWS cơ bản, dự án game đối kháng, workshop và hoàn thiện báo cáo.
+**Trong trang này** là nhật ký công việc thực tập **First Cloud AI Journey (FCAJ)** tại **Công ty TNHH Amazon Web Services Việt Nam**. Thời gian thực tập **5 tuần** từ **01/08/2026** đến **04/09/2026**, bao gồm kiến thức AWS cơ bản, dự án capstone, workshop và hoàn thiện báo cáo.
 
-**Sinh viên:** Lê Thành Nhơn (MSSV: 2280602244)  
+**Sinh viên:** Ninh Thị Thanh Vân (MSSV: 0215368)  
 **Cán bộ hướng dẫn tại đơn vị TT:** Nguyễn Gia Hưng – hunggia@amazon.com.vn  
-**Giảng viên hướng dẫn tại trường:** Nguyễn Lễ Văn – nl.van@hutech.edu.vn
+**Giảng viên hướng dẫn tại trường:** Lê Văn Minh
 
 **Tuần 1:** [Làm quen với AWS và tạo tài khoản AWS](1.1-week1/)
 
-**Tuần 2:** [Thực hành lab EC2 và VPC](1.2-week2/)
+**Tuần 2:** [Khám phá dịch vụ AWS, lưu trữ và giám sát](1.2-week2/)
 
-**Tuần 3:** [Khám phá dịch vụ AWS và triển khai ứng dụng](1.3-week3/)
+**Tuần 3:** [Bắt đầu dự án capstone — prototype và mô hình game](1.3-week3/)
 
-**Tuần 4:** [Dịch vụ lưu trữ dữ liệu (S3, DynamoDB, EBS)](1.4-week4/)
+**Tuần 4:** [Handoff client, CI/CD, IAM và CodeDeploy](1.4-week4/)
 
-**Tuần 5:** [Giám sát CloudWatch và thao tác AWS CLI](1.5-week5/)
-
-**Tuần 6:** [Bắt đầu dự án — prototype game với Scratch](1.6-week6/)
-
-**Tuần 7:** [Hoàn thiện mô hình game LeopardJS và Authentication](1.7-week7/)
-
-**Tuần 8:** [Handoff client và triển khai CI/CD với GitHub Actions](1.8-week8/)
-
-**Tuần 9:** [IAM Permission Boundaries và kiểm tra CodeDeploy](1.9-week9/)
-
-**Tuần 10:** [Hoàn thành đồ án và bắt đầu viết báo cáo](1.10-week10/)
-
-**Tuần 11:** [Hoàn thành workshop và deploy website báo cáo](1.11-week11/)
-
-**Tuần 12:** [Viết báo cáo thực tập và bài thu hoạch sự kiện](1.12-week12/)
+**Tuần 5:** [Hoàn thành dự án, workshop và báo cáo cuối kỳ](1.5-week5/)

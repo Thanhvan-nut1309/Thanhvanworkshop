@@ -10,7 +10,7 @@ pre: " <b> 5. </b> "
 
 ![Workshop screenshots](/images/5-Workshop/image1.png)
 
-Hands-on steps for the **serverless + EC2 Spot** multiplayer game backend documented in my internship proposal. This section covers the infrastructure and CI/CD work I was responsible for on the [fighting-game](https://github.com/Nothingtoread/fighting-game) project.
+Hands-on steps for the **serverless + EC2 Spot** multiplayer game backend documented in my internship proposal. This section covers the infrastructure and CI/CD work I was responsible for on the [capstone project](https://github.com/Thanhvan-nut1309/ThanhVanWorkshop) repository.
 
 **Region:** `ap-southeast-1`  
 **Scope:** EC2 warm pool fleet, S3 static client hosting, IAM, GitHub OIDC, CodeDeploy (Lambda + EC2), async match analytics, private MatchMaker VPC, live game demo, and documented teardown.

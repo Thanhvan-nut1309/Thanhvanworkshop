@@ -1,4 +1,4 @@
-baseURL = "https://nothingtoread.github.io/LeThanhNhon-FCAJ-Workshop/"
+baseURL = "https://Thanhvan-nut1309.github.io/Thanhvanworkshop/"
 relativeURLs = false
 canonifyURLs = true
 defaultContentLanguage = "en"
@@ -14,9 +14,9 @@ home = [ "HTML", "RSS", "JSON"]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "workshop"
   # Git hub repo link
-  editURL = "https://github.com/Nothingtoread/LeThanhNhon-FCAJ-Workshop/edit/main/content/"
+  editURL = "https://github.com/Thanhvan-nut1309/Thanhvanworkshop/edit/main/content/"
   description = ""
-  author = "nhon4560@gmail.com"
+  author = "ninhthanhvan2005@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false

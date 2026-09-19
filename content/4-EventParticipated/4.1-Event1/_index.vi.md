@@ -11,7 +11,7 @@ pre: " <b> 4.1. </b> "
 **Sự kiện:** AWS Enterprise Cloud Architectures and Industry Application — Study tour Swinburne Vietnam  
 **Thời gian:** Năm 2026 (study tour Swinburne–AWS lần thứ ba; phối hợp AWS First Cloud AI Journey)  
 **Địa điểm:** Amazon Web Services Vietnam  
-**Vai trò:** Người tham dự (sinh viên Swinburne Vietnam)
+**Vai trò:** Người tham dự (thực tập sinh FCAJ)
 
 ## Tổng quan
 

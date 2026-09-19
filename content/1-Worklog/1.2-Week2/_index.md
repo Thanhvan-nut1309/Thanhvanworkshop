@@ -1,6 +1,6 @@
 ---
 title: "Week 2 Worklog"
-date: 2026-05-12
+date: 2026-08-08
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
@@ -8,26 +8,28 @@ pre: " <b> 1.2. </b> "
 
 ### Week 2 Objectives:
 
-* Complete foundational AWS hands-on labs for EC2 and VPC.
-* Strengthen theoretical understanding of cloud networking and compute concepts.
+* Continue exploring additional AWS services beyond EC2 and VPC.
+* Deploy applications successfully on AWS infrastructure.
+* Deepen knowledge of AWS data storage services and monitoring.
 
-**Period:** 12/05/2026 – 18/05/2026
+**Period:** 08/08/2026 – 14/08/2026
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | ---------- | --------------- | ------------------ |
-| 2 | - Study EC2 fundamentals: instance types, AMI, EBS volumes, security groups | 12/05/2026 | 12/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - **Lab:** Launch an EC2 instance, connect via SSH, attach an EBS volume | 13/05/2026 | 13/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Study VPC concepts: subnets, route tables, internet gateway, CIDR blocks | 14/05/2026 | 14/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - **Lab:** Create a custom VPC with public subnet, launch EC2 inside it | 15/05/2026 | 15/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Review networking theory (OSI layers, public vs private IP) <br> - Document lab results and troubleshooting notes | 16/05/2026 | 16/05/2026 | |
+| 2 | - Explore S3: buckets, objects, permissions, static website hosting <br> - Explore IAM: users, roles, policies, least-privilege principle | 10/08/2026 | 10/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - **Lab:** Deploy a static web application to S3 with public read access <br> - **Lab:** Deploy a simple application on EC2 (web server + app code) | 11/08/2026 | 11/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Study S3 storage classes, versioning, and lifecycle policies <br> - Study EBS vs EFS and DynamoDB basics | 12/08/2026 | 12/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - **Lab:** Create DynamoDB table, insert/query items via console and CLI | 13/08/2026 | 13/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Study CloudWatch: metrics, alarms, logs, dashboards <br> - Install and configure AWS CLI (credentials, default region `ap-southeast-1`) | 14/08/2026 | 14/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Week 2 Achievements:
 
-* Successfully launched and connected to EC2 instances via SSH.
-* Created and attached EBS volumes; understood persistent vs ephemeral storage.
-* Built a basic VPC with subnets, route tables, and an internet gateway.
-* Understood how security groups act as virtual firewalls for instances.
-* Connected theoretical networking knowledge to practical AWS console operations.
-* Gained confidence navigating between EC2 and VPC consoles for resource management.
+* Deployed a static website on Amazon S3 and an application on EC2; verified public accessibility.
+* Understood IAM roles vs users and applied basic policy attachments.
+* Created and queried DynamoDB tables; configured S3 versioning and lifecycle rules.
+* Compared EBS, EFS, and S3 and identified appropriate use cases for each.
+* Installed and configured the AWS CLI and performed full CRUD operations on EC2, S3, and DynamoDB from the command line.
+* Created CloudWatch alarms and dashboards to monitor running resources.
+* Gained CLI proficiency and storage knowledge that would support the capstone project and CI/CD workflows.

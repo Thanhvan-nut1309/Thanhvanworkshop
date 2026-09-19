@@ -11,7 +11,7 @@ pre: " <b> 4.1. </b> "
 **Event:** AWS Enterprise Cloud Architectures and Industry Application — Swinburne Vietnam Study Tour  
 **Date:** 2026 (third annual Swinburne–AWS study tour; co-hosted with AWS First Cloud AI Journey)  
 **Location:** Amazon Web Services Vietnam  
-**Role:** Attendee (Swinburne Vietnam student participant)
+**Role:** Attendee (FCAJ intern)
 
 ## Event overview
 

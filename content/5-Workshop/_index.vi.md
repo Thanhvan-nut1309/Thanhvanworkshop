@@ -10,7 +10,7 @@ pre: " <b> 5. </b> "
 
 ![Ảnh chụp workshop](/images/5-Workshop/image1.png)
 
-Các bước thực hành cho backend game multiplayer **serverless + EC2 Spot** đã mô tả trong proposal thực tập. Phần này ghi lại hạ tầng và CI/CD em phụ trách trên dự án [fighting-game](https://github.com/Nothingtoread/fighting-game).
+Các bước thực hành cho backend game multiplayer **serverless + EC2 Spot** đã mô tả trong proposal thực tập. Phần này ghi lại hạ tầng và CI/CD em phụ trách trên dự án [capstone](https://github.com/Thanhvan-nut1309/ThanhVanWorkshop).
 
 **Region:** `ap-southeast-1`  
 **Phạm vi:** EC2 warm pool fleet, S3 static client hosting, IAM, GitHub OIDC, CodeDeploy (Lambda + EC2), async match analytics, VPC private MatchMaker, demo game trực tiếp và quy trình teardown có tài liệu.

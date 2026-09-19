@@ -43,7 +43,7 @@ Update the instance role when deploy and match-finish features require additiona
 
 Role name used in CI: `GitHubActionsFightingGameDeploy`.
 
-**Trust policy:** federated principal `token.actions.githubusercontent.com` (OIDC), scoped to repo `Nothingtoread/fighting-game`.
+**Trust policy:** federated principal `token.actions.githubusercontent.com` (OIDC), scoped to repo `Thanhvan-nut1309/ThanhVanWorkshop`.
 
 **Permissions policy** (summary):
 

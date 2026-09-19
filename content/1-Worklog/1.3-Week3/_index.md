@@ -1,6 +1,6 @@
 ---
 title: "Week 3 Worklog"
-date: 2026-05-19
+date: 2026-08-15
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
@@ -8,25 +8,28 @@ pre: " <b> 1.3. </b> "
 
 ### Week 3 Objectives:
 
-* Continue exploring additional AWS services beyond EC2 and VPC.
-* Deploy applications successfully on AWS infrastructure.
+* Begin the capstone project for the internship.
+* Prototype the basic project model and mechanics.
+* Complete the project model and begin implementing authentication with netcode.
 
-**Period:** 19/05/2026 – 25/05/2026
+**Period:** 15/08/2026 – 21/08/2026
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | ---------- | --------------- | ------------------ |
-| 2 | - Explore S3: buckets, objects, permissions, static website hosting | 19/05/2026 | 19/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Explore IAM: users, roles, policies, least-privilege principle | 20/05/2026 | 20/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - **Lab:** Deploy a static web application to S3 with public read access | 21/05/2026 | 21/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - **Lab:** Deploy a simple application on EC2 (web server + app code) | 22/05/2026 | 22/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Test deployed applications end-to-end <br> - Document deployment architecture | 23/05/2026 | 23/05/2026 | |
+| 2 | - Attend project kickoff: architecture overview, team roles, deliverables <br> - Define project requirements and cloud deployment scope | 17/08/2026 | 17/08/2026 | FCAJ project brief |
+| 3 | - **Prototype:** Build a basic prototype of the project core loop <br> - Iterate on the prototype: inputs, logic, win/lose conditions, UI flow | 18/08/2026 | 18/08/2026 | |
+| 4 | - Migrate prototype logic to the production web project structure <br> - Implement sprites, animations, and input handling | 19/08/2026 | 19/08/2026 | |
+| 5 | - Run and test the project locally; fix rendering and logic issues <br> - Study netcode architecture: WebSocket connections, player slots, state sync | 20/08/2026 | 20/08/2026 | |
+| 6 | - **Sketch:** Begin authentication flow design (login → session → match join) <br> - Integrate initial auth hooks with the netcode module | 21/08/2026 | 21/08/2026 | |
 
 ### Week 3 Achievements:
 
-* Deployed a static website on Amazon S3 with bucket policy and website hosting enabled.
-* Deployed an application on EC2 and verified public accessibility.
-* Understood IAM roles vs users and applied basic policy attachments.
-* Gained hands-on experience with the full deployment lifecycle: provision → configure → test.
-* Built practical skills that would later support the fighting-game project hosting on S3 and EC2.
+* Joined the capstone project as an active team member.
+* Built a playable prototype validating the core project loop before investing in cloud infrastructure.
+* Successfully migrated the prototype to the production web stack and ran it locally.
+* Implemented core gameplay features, health logic, and round outcomes.
+* Designed the authentication + netcode integration sketch for team handoff.
+* Understood WebSocket-based multiplayer patterns required for real-time interactions.
+* Prepared the client codebase for team collaboration and CI/CD setup in the following week.

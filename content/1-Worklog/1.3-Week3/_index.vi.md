@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 3"
-date: 2026-05-19
+date: 2026-08-15
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
@@ -8,25 +8,28 @@ pre: " <b> 1.3. </b> "
 
 ### Mục tiêu tuần 3:
 
-* Tiếp tục khám phá các dịch vụ AWS ngoài EC2 và VPC.
-* Triển khai ứng dụng thành công trên hạ tầng AWS.
+* Bắt đầu dự án capstone thực tập.
+* Prototype mô hình và cơ chế cơ bản của dự án.
+* Hoàn thiện mô hình dự án và bắt đầu triển khai authentication với netcode.
 
-**Thời gian:** 19/05/2026 – 25/05/2026
+**Thời gian:** 15/08/2026 – 21/08/2026
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | ------------ | --------------- | -------------- |
-| 2 | - Khám phá S3: bucket, object, quyền truy cập, static website hosting | 19/05/2026 | 19/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Khám phá IAM: user, role, policy, nguyên tắc least-privilege | 20/05/2026 | 20/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - **Lab:** Triển khai web tĩnh lên S3 với quyền public read | 21/05/2026 | 21/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - **Lab:** Triển khai ứng dụng đơn giản trên EC2 (web server + mã nguồn) | 22/05/2026 | 22/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Kiểm thử ứng dụng đã triển khai end-to-end <br> - Ghi lại kiến trúc triển khai | 23/05/2026 | 23/05/2026 | |
+| 2 | - Tham dự buổi kickoff dự án: tổng quan kiến trúc, vai trò team, deliverable <br> - Xác định yêu cầu dự án và phạm vi triển khai cloud | 17/08/2026 | 17/08/2026 | FCAJ project brief |
+| 3 | - **Prototype:** Xây dựng prototype cơ bản của vòng lặp chính dự án <br> - Cải tiến prototype: input, logic, điều kiện thắng/thua, luồng UI | 18/08/2026 | 18/08/2026 | |
+| 4 | - Chuyển logic prototype sang cấu trúc web dự án chính thức <br> - Triển khai sprite, animation và xử lý input | 19/08/2026 | 19/08/2026 | |
+| 5 | - Chạy và kiểm thử dự án cục bộ; sửa lỗi render và logic <br> - Tìm hiểu kiến trúc netcode: WebSocket, player slots, state sync | 20/08/2026 | 20/08/2026 | |
+| 6 | - **Sketch:** Thiết kế luồng authentication (login → session → match join) <br> - Tích hợp auth hooks ban đầu với module netcode | 21/08/2026 | 21/08/2026 | |
 
 ### Kết quả đạt được tuần 3:
 
-* Triển khai website tĩnh trên Amazon S3 với bucket policy và website hosting.
-* Triển khai ứng dụng trên EC2 và xác minh truy cập công khai.
-* Hiểu sự khác biệt IAM role vs user và gắn policy cơ bản.
-* Có kinh nghiệm thực tế với vòng đời triển khai: cấp phát → cấu hình → kiểm thử.
-* Xây dựng kỹ năng hỗ trợ trực tiếp cho dự án game (hosting S3 và EC2) sau này.
+* Gia nhập dự án capstone với vai trò thành viên tích cực.
+* Xây dựng prototype chạy được, xác thực vòng lặp chính trước khi đầu tư hạ tầng cloud.
+* Chuyển thành công prototype sang web stack chính thức và chạy cục bộ.
+* Triển khai tính năng gameplay cốt lõi, logic health và kết quả vòng đấu.
+* Thiết kế sketch authentication + tích hợp netcode cho team.
+* Hiểu các pattern multiplayer qua WebSocket cần thiết cho tương tác thời gian thực.
+* Chuẩn bị codebase client cho hợp tác nhóm và CI/CD ở tuần kế tiếp.

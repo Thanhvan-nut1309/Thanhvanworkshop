@@ -20,7 +20,7 @@ Mentor hướng dẫn rõ ràng về quyết định kiến trúc, theo dõi ti�
 
 **3. Sự phù hợp giữa công việc và chuyên ngành học**
 
-Dự án capstone fighting-game phù hợp với ngành **Mạng Máy Tính / Công Nghệ Thông Tin**, đồng thời mở rộng sang serverless, quản lý fleet Spot, GitOps và VPC endpoints — những mảng chưa được đào sâu tại trường. Công việc kết nối lý thuyết với thực hành AWS.
+Dự án capstone phù hợp với ngành **Khoa học máy tính**, đồng thời mở rộng sang serverless, quản lý fleet Spot, GitOps và VPC endpoints — những mảng chưa được đào sâu tại trường. Công việc kết nối lý thuyết với thực hành AWS.
 
 **4. Cơ hội học hỏi & phát triển kỹ năng**
 
@@ -32,7 +32,7 @@ Văn hóa chương trình nhấn mạnh học hỏi công khai, chia sẻ tại 
 
 **6. Chính sách / phúc lợi cho thực tập sinh**
 
-Lộ trình 12 tuần rõ ràng, deliverable cụ thể (worklog, proposal, workshop, báo cáo) và tài nguyên học AWS tạo khung thực tập ổn định. Các buổi nội bộ và sự kiện cộng đồng bổ trợ tốt cho tự học dự án.
+Lộ trình 5 tuần rõ ràng, deliverable cụ thể (worklog, proposal, workshop, báo cáo) và tài nguyên học AWS tạo khung thực tập ổn định. Các buổi nội bộ và sự kiện cộng đồng bổ trợ tốt cho tự học dự án.
 
 ---
 

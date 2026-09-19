@@ -25,7 +25,7 @@ Teammate-owned items (initial Cognito, API Gateway wiring, first MatchMaker Lamb
 
 - AWS account with admin access in `ap-southeast-1`
 - A working game server binary listening on **TCP 9000**
-- GitHub repository: `Nothingtoread/fighting-game`
+- GitHub repository: `Thanhvan-nut1309/ThanhVanWorkshop`
 - AWS CLI configured locally (optional, for verification)
 
 ## Resource naming reference

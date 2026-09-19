@@ -11,23 +11,23 @@ chapter: false
 
 ### Student Information:
 
-&emsp; **Full Name:** Lê Thành Nhơn
+&emsp; **Full Name:** Ninh Thị Thanh Vân
 
-&emsp; **Phone Number:** 0947885831
+&emsp; **Phone Number:** 0393996527
 
-&emsp; **Email:** nhon30041975@gmail.com
+&emsp; **Email:** ninhthanhvan2005@gmail.com
 
-&emsp; **University:** Ho Chi Minh City University of Technology and Education
+&emsp; **University:** Hanoi University of Civil Engineering
 
-&emsp; **Major:** Information Technology
+&emsp; **Major:** Computer Science
 
-&emsp; **Class:** 22DTHE4
+&emsp; **Class:** 68CNCS
 
 &emsp; **Internship Company:** Amazon Web Services Viet Nam Company Limited
 
-&emsp; **Internship Position:** Workforce Bootcamp - First Cloud AI Journey
+&emsp; **Internship Position:** Cloud Computing - First Cloud AI Journey
 
-&emsp; **Internship Duration:** From 05/05/2025 to 30/07/2025
+&emsp; **Internship Duration:** From 01/08/2026 to 04/09/2026
 
 ![Profile picture](/images/avatar.jpg)
 
