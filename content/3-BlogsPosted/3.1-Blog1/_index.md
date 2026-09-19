@@ -6,38 +6,27 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# HOW ALS GEOANALYTICS' LITHOLENS REVOLUTIONIZES CORE LOGGING THROUGH MACHINE LEARNING WITH AMAZON EKS
+# INTEGRATING AMAZON EVENTBRIDGE INTO YOUR SERVERLESS APPLICATIONS
 
-ALS Geoanalytics developed **LithoLens**, a cloud-native platform utilizing computer vision and machine learning (ML) to automate and optimize the process of geological core logging. The system automates the ingestion, classification, and analysis of drill core photographs, significantly speeding up geological evaluations for mining and resource exploration.
+Event-driven architecture enables developers to create decoupled services across applications. In this blog — summarized from the AWS Compute Blog article by James Beswick — I show how **Amazon EventBridge** delivers matching events to targets such as **AWS Lambda**, so your business logic reacts to events instead of making synchronous calls.
 
 ### Key Architectural Components:
 
-- **Client Access & API Layer:**  
-  The client applications connect securely through **Amazon API Gateway** and **AWS Lambda** (API Layer), with user authentication managed via **Amazon Cognito**.
+- **Event Producer & Consumer (AWS Lambda):** applications publish events to EventBridge with `putEvents`. In the walkthrough, a banking ATM application (the producer) emits transaction events, while several downstream Lambda functions (the consumers) process only the subset of events they subscribe to.
 
-- **Compute & Processing Layer:**  
-  **Amazon EKS (Elastic Kubernetes Service)** orchestrates the containerized machine learning inference workloads. Running models on EKS allows ALS to scale container instances dynamically based on the volume of images being processed.
+- **Amazon EventBridge Rules & Targets:** the default event bus matches incoming JSON events against rules; each rule defines an event pattern and the target to invoke. Rules are declared with the `AWS::Events::Rule` resource, and an `AWS::Lambda::Permission` grants EventBridge permission to invoke the target function.
 
-- **Storage & Database Layer:**
-  - **Amazon S3** stores the massive volume of high-resolution drill core images.
-  - **Amazon RDS** manages metadata, user accounts, and structural geological records.
-  - **Amazon CloudWatch** monitors application performance and stores operational logs.
+- **Declarative setup with AWS SAM:** the whole sample deploys through the AWS Serverless Application Model (SAM). Two integration styles are covered — configuring the rule through the function's `Events` property, or declaring the rule as a standalone resource with explicit events pattern, targets and permissions.
 
 ### Benefits of the Architecture:
 
-- **Scalability:** Auto-scaling Kubernetes clusters in EKS efficiently handle spikes in machine learning workloads.
-- **Cost Efficiency:** Serverless APIs (API Gateway & Lambda) combined with scalable containers ensure ALS only pays for active computing resource usage.
-- **Performance:** GPU-optimized instances in EKS speed up deep learning image inference.
-
----
-
-### Architecture Diagram:
-
-![LithoLens Architecture](/images/3-BlogsPosted/blog1.png)
+- **Decoupling:** services communicate through events rather than direct calls, so producers and consumers scale and evolve independently.
+- **Minimal configuration:** EventBridge handles routing, at-least-once delivery with retries, and batching out of the box.
+- **Cost efficient:** the example runs within the AWS Free Tier, and you only pay when an event is actually processed.
 
 ---
 
 ### Links and References:
 
-- **Facebook Post:** [AWS Study Group Facebook Post](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2199204024177891/)
-- **Reference Article:** [How ALS Geoanalytics' LithoLens revolutionizes core logging through machine learning with Amazon EKS](https://aws.amazon.com/vi/blogs/architecture/how-als-geoanalytics-litholens-revolutionizes-core-logging-through-machine-learning-with-amazon-eks/)
+- **Facebook Post:** [AWS Study Group Facebook Group](https://www.facebook.com/groups/awsstudygroupfcj)
+- **Reference Article:** [Integrating Amazon EventBridge into your serverless applications](https://aws.amazon.com/blogs/compute/integrating-amazon-eventbridge-into-your-serverless-applications)

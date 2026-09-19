@@ -6,41 +6,29 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-# PROVISIONING ORACLE DATABASE@AWS RESOURCES USING TERRAFORM
+# BUILDING, DEPLOYING, AND OPERATING CONTAINERIZED APPLICATIONS WITH AWS FARGATE
 
-This blog explores **Oracle Database@AWS**, a co-location service that brings Oracle Cloud Infrastructure (OCI) database services directly into AWS data centers. This solution allows companies to run enterprise-grade Oracle Exadata database workloads inside AWS with sub-millisecond latency connection to AWS services like Amazon EC2.
+Summarized from the AWS Compute Blog article, this post walks through an end-to-end workflow for running containerized applications with **Amazon ECS** and **AWS Fargate**, including a CI/CD pipeline with **AWS CodeBuild** and **AWS CodePipeline** that builds, deploys and operates the application automatically.
 
-### Key Architectural Concepts:
+### Key Architectural Components:
 
-- **Customer VPC & Application Layer:**  
-  The client applications run on **Amazon EC2** instances inside a standard AWS Customer VPC.
+- **Amazon ECS Cluster & Task Definition:** a cluster groups the workloads, and a task definition is the blueprint describing the container image, the `awsvpc` network mode and the CPU/memory requirements for the task.
 
-- **Oracle Database (ODB) Network:**  
-  An ODB Network VPC is established inside the AWS Region, housing client and backup subnets. It connects to the Customer VPC via **ODB Peering**.
+- **AWS Fargate launch type:** Fargate runs containers without provisioning or managing EC2 instances — you specify the image, CPU and memory, and Fargate provides the compute with per-second billing.
 
-- **OCI Child Site (Co-located inside AWS Datacenter):**  
-  The OCI Child site contains the actual physical **Exadata Infrastructure** running OCI Virtual Cloud Network (VCN) client and backup subnets mapped directly to AWS subnets.
+- **Application Load Balancer & ECS service:** the service keeps the desired number of tasks running, registers them with the ALB, and spreads tasks across Availability Zones for high availability.
 
-- **Control Plane & Automation:**  
-  Resource orchestration and lifecycle management are automated via **OCI Automation** connected to the **OCI Control Plane** in the OCI Parent Region.
+- **CI/CD pipeline:** **AWS CodeBuild** compiles the application and pushes images to **Amazon ECR**, and **AWS CodePipeline** automates the build → deploy → operate loop.
 
-### Infrastructure as Code (IaC) with Terraform:
+### Benefits of the Architecture:
 
-By using the **Terraform** OCI and AWS providers, cloud engineers can provision this entire cross-cloud infrastructure in a unified workflow:
-
-1. Create VPCs, Subnets, and Route Tables in AWS.
-2. Initialize OCI provider to provision the Exadata Infrastructure.
-3. Configure the private connectivity and network peering between AWS and OCI child sites automatically.
-
----
-
-### Architecture Diagram:
-
-![Oracle Database@AWS Architecture](/images/3-BlogsPosted/blog2.png)
+- **No infrastructure management:** there are no EC2 instances or cluster capacity to operate; Fargate provisions compute exactly as the containers need.
+- **High availability:** the ECS service maintains the desired task count and distributes tasks across AZs behind the load balancer.
+- **Automated delivery:** the CodePipeline integration turns every code change into a deployed, containerized release.
 
 ---
 
 ### Links and References:
 
-- **Facebook Post:** [AWS Study Group Facebook Post](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2198792150885745/)
-- **Reference Article:** [Provision Oracle Database and AWS resources using Terraform](https://aws.amazon.com/vi/blogs/database/provision-oracle-databaseaws-resources-using-terraform/)
+- **Facebook Post:** [AWS Study Group Facebook Group](https://www.facebook.com/groups/awsstudygroupfcj)
+- **Reference Article:** [Building, deploying, and operating containerized applications with AWS Fargate](https://aws.amazon.com/blogs/compute/building-deploying-and-operating-containerized-applications-with-aws-fargate)

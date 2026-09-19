@@ -6,25 +6,27 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# ALS GEOANALYTICS' LITHOLENS VÀ MACHINE LEARNING VỚI AMAZON EKS
+# TÍCH HỢP AMAZON EVENTBRIDGE VÀO ỨNG DỤNG SERVERLESS
 
-ALS Geoanalytics phát triển **LithoLens** — nền tảng cloud-native dùng computer vision và ML để tự động hóa quy trình core logging địa chất, tăng tốc đánh giá tài nguyên khoáng sản.
+Kiến trúc event-driven giúp xây dựng các dịch vụ tách rời trong ứng dụng. Trong bài blog này — tóm tắt từ bài viết trên AWS Compute Blog của James Beswick — em trình bày cách **Amazon EventBridge** chuyển các event khớp quy tắc tới target như **AWS Lambda**, để business logic phản ứng với event thay vì gọi đồng bộ.
 
 ### Thành phần kiến trúc chính:
 
-- **Client & API Layer:** API Gateway, Lambda, Cognito.
-- **Compute Layer:** Amazon EKS điều phối container ML inference, scale theo lượng ảnh xử lý.
-- **Storage & Database:** S3 lưu ảnh core, RDS metadata, CloudWatch giám sát.
+- **Event Producer & Consumer (AWS Lambda):** ứng dụng publish event lên EventBridge bằng `putEvents`. Trong ví dụ, ứng dụng ngân hàng ATM (producer) tạo các event giao dịch, nhiều Lambda function downstream (consumer) chỉ xử lý tập event mà mình đăng ký.
 
-### Lợi ích:
+- **EventBridge Rules & Targets:** event bus mặc định so khớp event JSON với các rule; mỗi rule định nghĩa event pattern và target cần gọi. Rule được khai báo bằng resource `AWS::Events::Rule`, kèm `AWS::Lambda::Permission` cấp quyền EventBridge gọi Lambda.
 
-- **Khả năng mở rộng** với auto-scaling trên EKS.
-- **Tiết kiệm chi phí** nhờ serverless API + container scale theo nhu cầu.
-- **Hiệu năng cao** với GPU instance cho deep learning inference.
+- **Khai báo bằng AWS SAM:** toàn bộ sample được triển khai bằng AWS Serverless Application Model (SAM). Bài hướng dẫn hai kiểu — cấu hình rule qua thuộc tính `Events` của function, hoặc khai báo rule là resource độc lập với event pattern, targets và permissions tường minh.
 
-![LithoLens Architecture](/images/3-BlogsPosted/blog1.png)
+### Lợi ích của kiến trúc:
+
+- **Tách rời:** các dịch vụ trao đổi với nhau qua event thay vì gọi trực tiếp, nên producer và consumer mở rộng, phát triển độc lập.
+- **Cấu hình tối giản:** EventBridge lo routing, phân phối at-least-once kèm retry và batching ngay khi dùng.
+- **Chi phí thấp:** ví dụ chạy trong AWS Free Tier, chỉ trả phí khi event thực sự được xử lý.
+
+---
 
 ### Liên kết tham khảo:
 
-- [Bài đăng Facebook](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2199204024177891/)
-- [Bài viết AWS](https://aws.amazon.com/vi/blogs/architecture/how-als-geoanalytics-litholens-revolutionizes-core-logging-through-machine-learning-with-amazon-eks/)
+- **Bài đăng Facebook:** [Nhóm AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj)
+- **Bài viết AWS:** [Integrating Amazon EventBridge into your serverless applications](https://aws.amazon.com/blogs/compute/integrating-amazon-eventbridge-into-your-serverless-applications)
