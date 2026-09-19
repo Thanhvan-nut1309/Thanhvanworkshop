@@ -60,6 +60,14 @@ for (const r of due) {
 
 Wire the deploy into automation: **GitHub → AWS CodeBuild → Amazon ECR → ECS** so every `git push` to `main` rebuilds and redeploys the `library-app` image (same pattern used to deploy this report site with GitHub Actions + GitHub Pages).
 
+### Screenshots for this section (optional — if you implement the pipeline)
+
+{{< screenshot src="/images/5-Workshop/5.8-Automation/lambda-function.png" lang="en" caption="Lambda console: library-due-date-reminder function created." >}}
+
+{{< screenshot src="/images/5-Workshop/5.8-Automation/eventbridge-rule.png" lang="en" caption="EventBridge rule with the Schedule source and cron expression 0 1 * * ? * targeting the Lambda function." >}}
+
+{{< screenshot src="/images/5-Workshop/5.8-Automation/ses-email.png" lang="en" caption="A received due-date reminder email (reader whose book is due within 1-2 days or overdue)." >}}
+
 ## Expected outcome
 
 - Readers automatically receive due-date reminders — no manual daily checks

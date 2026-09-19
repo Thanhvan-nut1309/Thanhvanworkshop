@@ -41,6 +41,16 @@ Provision the three **managed data services** the application depends on: **Amaz
 5. **Automatic rotation:** keep `Disable` (not needed for the workshop).
 6. **Store**, then copy the **Secret ARN** — used when configuring the ECS task definition ([5.6](5.6-Deploy/)).
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/rds-create-config.png" lang="en" caption="RDS Create database (Full configuration): Engine MySQL, Free tier, identifier library-db, initial database name library_db." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/rds-available.png" lang="en" caption="RDS console: library-db in Available state, Public access = No, VPC = library-vpc." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/s3-bucket-created.png" lang="en" caption="S3 console listing bucket library-covers-thanhvan-2026 with Block Public Access on." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/secret-created.png" lang="en" caption="Secrets Manager: secret library-db-credentials linked to the library-db database." >}}
+
 ## Expected outcome
 
 - `library-db` in `Available` state, private inside `library-vpc`, no public access

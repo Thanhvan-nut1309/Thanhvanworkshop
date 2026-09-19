@@ -41,6 +41,16 @@ Dựng ba **dịch vụ dữ liệu managed** mà ứng dụng phụ thuộc: **
 5. **Automatic rotation:** giữ `Disable` (không cần cho workshop).
 6. **Store**, rồi copy **Secret ARN** — dùng khi cấu hình ECS task definition ([5.6](5.6-Deploy/)).
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/rds-create-config.png" lang="vi" caption="Màn hình RDS Create database (Full configuration): Engine MySQL, Free tier, identifier library-db, initial database name library_db." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/rds-available.png" lang="vi" caption="Console RDS: library-db ở trạng thái Available, Public access = No, VPC = library-vpc." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/s3-bucket-created.png" lang="vi" caption="Console S3 liệt kê bucket library-covers-thanhvan-2026 với Block Public Access bật." >}}
+
+{{< screenshot src="/images/5-Workshop/5.4-Application-Services/secret-created.png" lang="vi" caption="Secrets Manager: secret library-db-credentials liên kết với database library-db." >}}
+
 ## Kết quả mong đợi
 
 - `library-db` trạng thái `Available`, private trong `library-vpc`, không public access

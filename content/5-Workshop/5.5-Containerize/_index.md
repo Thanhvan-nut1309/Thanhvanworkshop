@@ -48,6 +48,14 @@ The final lines report the image digest and size — the image is now in ECR.
 
 In **ECR → Repositories → library-management**, the image `latest` appears with the same `sha256` digest as the local build.
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/ecr-repository.png" lang="en" caption="ECR Repositories page showing the private repository library-management." >}}
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/docker-login-succeeded.png" lang="en" caption="Terminal output of the ECR login command ending with Login Succeeded." >}}
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/image-pushed.png" lang="en" caption="Terminal: docker push completes with the image digest, or the ECR console showing image latest with the sha256 digest." >}}
+
 ## Expected outcome
 
 - Private ECR repository `library-management` with the tested image

@@ -41,6 +41,16 @@ curl.exe -X POST http://localhost:3000/api/books -H "Authorization: Bearer <admi
 
 `GET /api/books?q=tô+hoài` → filters by title/author/category.
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/register-login.png" lang="en" caption="Terminal: register and login requests through the ALB returning the created user and a JWT." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/admin-create-book.png" lang="en" caption="Admin creates a book (e.g. De Men phieu luu ky by To Hoai) and gets the created record back." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/borrow-return.png" lang="en" caption="Reader borrow flow: POST /api/borrow creates a loan with the 14-day due date; GET /api/borrow/me lists it; return sets status returned." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/search-results.png" lang="en" caption="Search results: GET /api/books?q=tô+hoài filters by title/author/category." >}}
+
 ## Deployed-system verification
 
 After ECS + ALB deployment and schema migration:

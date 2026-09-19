@@ -1,0 +1,35 @@
+{{- /*
+  screenshot shortcode — workshop screenshot placeholder.
+  Usage: {{< screenshot src="/images/5-Workshop/<section>/<file>.png" lang="en|vi" caption="..." >}}
+  If the file exists under static/, renders the image + caption.
+  Otherwise renders a highlighted placeholder showing the exact path to save.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default (path.Base $src) -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $lang := .Get "lang" | default "en" -}}
+{{- $exists := fileExists (printf "static%s" $src) -}}
+{{- $imgURL := print (.Site.BaseURL) (strings.TrimPrefix "/" $src) -}}
+
+{{- if $exists -}}
+<figure class="ws-shot">
+  <img class="ws-shot-img" src="{{ $imgURL }}" alt="{{ $alt }}" loading="lazy" />
+  {{- with $caption }}
+  <figcaption class="ws-shot-cap">{{ . }}</figcaption>
+  {{- end }}
+</figure>
+{{- else -}}
+<div class="ws-shot ws-shot-missing">
+  <div class="ws-shot-missing-top">
+    <span class="ws-shot-icon" aria-hidden="true">📸</span>
+    <div class="ws-shot-missing-text">
+      <div class="ws-shot-missing-title">{{ if eq $lang "vi" }}Ảnh cần bổ sung{{ else }}Screenshot to add{{ end }}</div>
+      <div class="ws-shot-missing-path">static{{ $src }}</div>
+      <div class="ws-shot-missing-action">{{ if eq $lang "vi" }}Chụp thao tác này và lưu ảnh PNG đúng tên file, đúng thư mục (thư mục static{{ path.Dir $src }}). Ảnh sẽ tự động hiển thị khi có file.{{ else }}Capture this step and save the PNG with this exact file name and folder (static{{ path.Dir $src }}). The image appears automatically once the file exists.{{ end }}</div>
+    </div>
+  </div>
+  {{- with $caption }}
+  <div class="ws-shot-cap">{{ . }}</div>
+  {{- end }}
+</div>
+{{- end -}}

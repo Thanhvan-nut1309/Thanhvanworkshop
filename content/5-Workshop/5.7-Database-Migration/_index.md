@@ -42,6 +42,18 @@ Load the `schema.sql` into **RDS** (tables `books`, `users`, `borrow_records`) *
 
 > Do **not** skip this step. The temporary public window exists only for migration; leaving it open would expose the database to the internet.
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/rds-public-yes.png" lang="en" caption="RDS Modify screen with Public access set to Yes (Apply immediately)." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/sg-inbound-3306.png" lang="en" caption="library-db-sg inbound rules: MySQL/Aurora on port 3306 from My IP." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/workbench-connection.png" lang="en" caption="MySQL Workbench: Test Connection to library-db.cb826ysqej0o.ap-southeast-2.rds.amazonaws.com succeeds." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/workbench-schema.png" lang="en" caption="MySQL Workbench after running schema.sql: tables books, users and borrow_records exist in library_db." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/rds-public-reverted.png" lang="en" caption="RDS modified back to Public access = No and the inbound 3306 rule removed from library-db-sg." >}}
+
 ## Expected outcome
 
 - RDS contains the full schema (`books`, `users`, `borrow_records`)

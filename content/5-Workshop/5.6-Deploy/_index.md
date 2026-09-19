@@ -53,6 +53,18 @@ Run the containerized backend on **Amazon ECS with AWS Fargate** (serverless com
 
 Open the **ALB DNS name** in a browser (e.g. `http://library-alb-....elb.amazonaws.com/health`). A healthy response is `{"status":"ok"}`.
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/task-role.png" lang="en" caption="IAM console: role library-ecs-task-role with the SecretsManagerReadWrite policy attached." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/cluster.png" lang="en" caption="ECS Clusters page showing library-cluster with Fargate infrastructure." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/task-definition-env.png" lang="en" caption="Task definition task-library-management revision with the five environment variables (PORT, USE_SECRETS_MANAGER, AWS_REGION, DB_SECRET_NAME, JWT_SECRET)." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/service-alb.png" lang="en" caption="ECS service with the Application Load Balancer and target group: health check path /health on port 3000, target group healthy." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/health-alb.png" lang="en" caption="Browser opening the ALB DNS name /health returning status ok — the load balancer checks the same endpoint." >}}
+
 ## Debugging story — app fell back to `localhost:3306`
 
 Symptom: the ALB started answering, but the app kept trying to connect to `localhost:3306` instead of RDS — i.e. `USE_SECRETS_MANAGER` was not active, so the code fell back to its default connection string.

@@ -48,6 +48,14 @@ Dòng cuối báo digest và dung lượng image — image đã nằm trong ECR.
 
 Trong **ECR → Repositories → library-management**, image `latest` xuất hiện với `sha256` digest khớp với bản build local.
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/ecr-repository.png" lang="vi" caption="Trang ECR Repositories hiển thị repository private library-management." >}}
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/docker-login-succeeded.png" lang="vi" caption="Kết quả lệnh đăng nhập ECR trên terminal kết thúc bằng Login Succeeded." >}}
+
+{{< screenshot src="/images/5-Workshop/5.5-Containerize/image-pushed.png" lang="vi" caption="Terminal: docker push hoàn tất kèm digest, hoặc console ECR hiển thị image latest với sha256 digest." >}}
+
 ## Kết quả mong đợi
 
 - ECR repository riêng tư `library-management` chứa image đã test

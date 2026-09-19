@@ -42,6 +42,18 @@ Nạp `schema.sql` vào **RDS** (các bảng `books`, `users`, `borrow_records`)
 
 > Đừng bỏ qua bước này. Cửa sổ public chỉ tồn tại để migrate; để mở sẽ lộ database ra internet.
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/rds-public-yes.png" lang="vi" caption="Màn hình RDS Modify với Public access chuyển sang Yes (Apply immediately)." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/sg-inbound-3306.png" lang="vi" caption="Inbound rules của library-db-sg: MySQL/Aurora port 3306 từ My IP." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/workbench-connection.png" lang="vi" caption="MySQL Workbench: Test Connection tới library-db.cb826ysqej0o.ap-southeast-2.rds.amazonaws.com thành công." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/workbench-schema.png" lang="vi" caption="MySQL Workbench sau khi chạy schema.sql: các bảng books, users và borrow_records tồn tại trong library_db." >}}
+
+{{< screenshot src="/images/5-Workshop/5.7-Database-Migration/rds-public-reverted.png" lang="vi" caption="RDS đã quay lại Public access = No và xoá inbound rule 3306 khỏi library-db-sg." >}}
+
 ## Kết quả mong đợi
 
 - RDS có đầy đủ schema (`books`, `users`, `borrow_records`)

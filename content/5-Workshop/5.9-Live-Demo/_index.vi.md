@@ -41,6 +41,16 @@ curl.exe -X POST http://localhost:3000/api/books -H "Authorization: Bearer <admi
 
 `GET /api/books?q=tô+hoài` → lọc theo tên/tác giả/thể loại.
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/register-login.png" lang="vi" caption="Terminal: register và login qua ALB trả về user đã tạo và JWT." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/admin-create-book.png" lang="vi" caption="Admin tạo sách (ví dụ Dế Mèn phiêu lưu ký của Tô Hoài) và nhận lại bản ghi vừa tạo." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/borrow-return.png" lang="vi" caption="Luồng mượn của độc giả: POST /api/borrow tạo khoản mượn kèm hạn 14 ngày; GET /api/borrow/me liệt kê; trả sách đưa status về returned." >}}
+
+{{< screenshot src="/images/5-Workshop/5.9-Live-Demo/search-results.png" lang="vi" caption="Kết quả tìm kiếm: GET /api/books?q=tô+hoài lọc theo tên/tác giả/thể loại." >}}
+
 ## Kiểm chứng trên hệ thống đã deploy
 
 Sau khi ECS + ALB và migrate schema:

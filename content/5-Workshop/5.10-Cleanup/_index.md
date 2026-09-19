@@ -22,6 +22,12 @@ After the capstone was deployed and demonstrated, I documented the teardown of t
 | 8 | **VPC** | Delete `library-vpc` — removes subnets, route tables, internet gateway and the remaining security groups in one action. |
 | 9 | **IAM roles** | Delete `library-ecs-task-role` and any temporary roles created for the task. |
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.10-Cleanup/service-desired-zero.png" lang="en" caption="ECS service scaled to Desired = 0 with the tasks stopped before deleting the service and cluster." >}}
+
+{{< screenshot src="/images/5-Workshop/5.10-Cleanup/no-resources-remain.png" lang="en" caption="Verification after teardown: VPC, RDS, ECS and S3 consoles no longer list any library-* resources." >}}
+
 ## Verification
 
 After teardown:

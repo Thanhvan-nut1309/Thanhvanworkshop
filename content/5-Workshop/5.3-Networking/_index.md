@@ -32,6 +32,16 @@ Check **Your VPCs** shows `library-vpc` with **State = Available**, and **Subnet
 2. VPC: `library-vpc`.
 3. No inbound rule yet — the inbound MySQL rule is opened only briefly during the one-time schema migration ([5.7](5.7-Database-Migration/)), then removed.
 
+### Screenshots for this section
+
+{{< screenshot src="/images/5-Workshop/5.3-Networking/vpc-wizard-config.png" lang="en" caption="Create VPC (VPC and more) wizard filled in: name library-vpc, 2 AZs, 2 public + 2 private subnets, NAT Gateway Regional." >}}
+
+{{< screenshot src="/images/5-Workshop/5.3-Networking/vpc-created.png" lang="en" caption="Your VPCs page showing library-vpc with State = Available." >}}
+
+{{< screenshot src="/images/5-Workshop/5.3-Networking/subnets-list.png" lang="en" caption="Subnets page filtered on library-vpc listing the 2 public + 2 private subnets." >}}
+
+{{< screenshot src="/images/5-Workshop/5.3-Networking/db-security-group.png" lang="en" caption="Security group library-db-sg created with no inbound rules yet." >}}
+
 ## Expected outcome
 
 - A dedicated `library-vpc` with public/private subnet separation

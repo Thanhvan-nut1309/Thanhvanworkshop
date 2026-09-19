@@ -53,6 +53,18 @@ Chạy backend trong container trên **Amazon ECS với AWS Fargate** (compute s
 
 Mở **ALB DNS name** trong trình duyệt (vd `http://library-alb-....elb.amazonaws.com/health`). Kết quả khỏe mạnh là `{"status":"ok"}`.
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/task-role.png" lang="vi" caption="Console IAM: role library-ecs-task-role gắn policy SecretsManagerReadWrite." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/cluster.png" lang="vi" caption="Trang ECS Clusters hiển thị library-cluster với hạ tầng Fargate." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/task-definition-env.png" lang="vi" caption="Task definition task-library-management với 5 biến môi trường (PORT, USE_SECRETS_MANAGER, AWS_REGION, DB_SECRET_NAME, JWT_SECRET)." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/service-alb.png" lang="vi" caption="ECS service với Application Load Balancer và target group: health check /health port 3000, target group healthy." >}}
+
+{{< screenshot src="/images/5-Workshop/5.6-Deploy/health-alb.png" lang="vi" caption="Trình duyệt mở /health theo DNS name của ALB trả về status ok — đây cũng là endpoint load balancer dùng để check." >}}
+
 ## Câu chuyện debug — app fallback về `localhost:3306`
 
 Triệu chứng: ALB bắt đầu trả lời, nhưng app vẫn cố kết nối `localhost:3306` thay vì RDS — tức `USE_SECRETS_MANAGER` chưa có hiệu lực, code quay về connection string mặc định.

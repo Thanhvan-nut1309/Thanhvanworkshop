@@ -59,6 +59,14 @@ Dùng `curl.exe` (không phải alias `curl` của PowerShell) để cú pháp `
 4. Trả sách → `status = returned`, khôi phục số bản.
 5. Tìm kiếm theo tên/tác giả/thể loại trả về đúng tập con.
 
+### Ảnh cần bổ sung cho phần này
+
+{{< screenshot src="/images/5-Workshop/5.2-Foundation/local-health-check.png" lang="vi" caption="Kết quả docker compose up (2 container app + mysql); http://localhost:3000/health trả về status ok." >}}
+
+{{< screenshot src="/images/5-Workshop/5.2-Foundation/register-api.png" lang="vi" caption="Smoke-test register: curl POST /api/auth/register trả về user mới và JWT." >}}
+
+{{< screenshot src="/images/5-Workshop/5.2-Foundation/borrow-record.png" lang="vi" caption="Kết quả mượn sách: bản ghi borrow_records có due_date = ngày mượn + 14 ngày, available_copies giảm." >}}
+
 ## Kết quả mong đợi
 
 - `GET /health` trả `{"status":"ok"}`
