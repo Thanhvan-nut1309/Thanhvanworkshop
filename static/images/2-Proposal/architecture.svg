@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <marker id="arrowGlass" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7a9ec9"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <!-- ================= Users ================= -->
+  <g>
+    <rect x="40" y="120" width="190" height="110" rx="10" fill="#fff7ed" stroke="#f58220" stroke-width="2"/>
+    <text x="135" y="152" text-anchor="middle" font-size="15" font-weight="bold" fill="#333">Users</text>
+    <text x="135" y="174" text-anchor="middle" font-size="13" fill="#444">• Admin (librarian)</text>
+    <text x="135" y="194" text-anchor="middle" font-size="13" fill="#444">• Readers (borrowers)</text>
+    <text x="135" y="214" text-anchor="middle" font-size="12" fill="#777">Web browser</text>
+  </g>
+
+  <!-- User -> ALB -->
+  <line x1="230" y1="160" x2="400" y2="160" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="300" y="148" text-anchor="middle" font-size="11" fill="#666">HTTPS</text>
+
+  <!-- ================= VPC ================= -->
+  <rect x="390" y="70" width="560" height="420" rx="12" fill="#f4f8fb" stroke="#89b2d8" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="680" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a5d8f">Amazon VPC — library-vpc (ap-southeast-2)</text>
+
+  <!-- Public subnets band -->
+  <rect x="410" y="120" width="520" height="120" rx="8" fill="#eaf3fb" stroke="#7a9ec9" stroke-width="1.5"/>
+  <text x="425" y="142" font-size="12" font-weight="bold" fill="#2a5d8f">Public subnets (AZ a + AZ b)</text>
+
+  <!-- ALB -->
+  <rect x="430" y="155" width="200" height="66" rx="8" fill="#ffffff" stroke="#c9a227" stroke-width="2"/>
+  <text x="530" y="182" text-anchor="middle" font-size="13" font-weight="bold" fill="#8a6d00">Application Load</text>
+  <text x="530" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#8a6d00">Balancer (HTTPS)</text>
+
+  <!-- NAT Gateway -->
+  <rect x="720" y="155" width="190" height="66" rx="8" fill="#ffffff" stroke="#7a9ec9" stroke-width="1.5"/>
+  <text x="815" y="182" text-anchor="middle" font-size="13" font-weight="bold" fill="#2a5d8f">NAT Gateway</text>
+  <text x="815" y="200" text-anchor="middle" font-size="11" fill="#555">outbound for private</text>
+  <text x="815" y="213" text-anchor="middle" font-size="11" fill="#555">subnets (Regional)</text>
+
+  <!-- ALB -> ECS -->
+  <line x1="530" y1="221" x2="530" y2="265" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Private subnets band -->
+  <rect x="410" y="268" width="520" height="150" rx="8" fill="#e6f4ea" stroke="#5aa469" stroke-width="1.5"/>
+  <text x="425" y="290" font-size="12" font-weight="bold" fill="#2e7d32">Private subnets (AZ a + AZ b)</text>
+
+  <!-- ECS Fargate -->
+  <rect x="430" y="305" width="240" height="96" rx="8" fill="#ffffff" stroke="#5aa469" stroke-width="2"/>
+  <text x="550" y="332" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7d32">Amazon ECS Fargate</text>
+  <text x="550" y="354" text-anchor="middle" font-size="12" fill="#444">library-app container</text>
+  <text x="550" y="374" text-anchor="middle" font-size="11" fill="#444">Node.js + Express · :3000</text>
+  <text x="550" y="392" text-anchor="middle" font-size="10" fill="#888">reads DB via Secrets Manager</text>
+
+  <!-- ECS -> RDS -->
+  <path d="M 700 330 C 780 330 780 395 840 395" fill="none" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="778" y="352" text-anchor="middle" font-size="10" fill="#666">SQL</text>
+
+  <!-- RDS -->
+  <rect x="852" y="360" width="220" height="80" rx="8" fill="#ffffff" stroke="#7a3fa0" stroke-width="2"/>
+  <text x="962" y="388" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a3fa0">Amazon RDS MySQL</text>
+  <text x="962" y="408" text-anchor="middle" font-size="12" fill="#444">library-db (free tier)</text>
+  <text x="962" y="426" text-anchor="middle" font-size="11" fill="#444">DB: library_db</text>
+
+  <!-- S3 (outside VPC) -->
+  <rect x="30" y="330" width="240" height="80" rx="8" fill="#ffffff" stroke="#d29922" stroke-width="2"/>
+  <text x="150" y="360" text-anchor="middle" font-size="13" font-weight="bold" fill="#8a6d00">Amazon S3</text>
+  <text x="150" y="380" text-anchor="middle" font-size="12" fill="#444">library-covers-thanhvan-2026</text>
+  <text x="150" y="398" text-anchor="middle" font-size="11" fill="#444">book cover images</text>
+  <path d="M 270 370 C 350 370 350 300 425 300" fill="none" stroke="#555" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="348" y="340" text-anchor="middle" font-size="10" fill="#666">upload covers</text>
+
+  <!-- Secrets Manager -->
+  <rect x="30" y="440" width="240" height="80" rx="8" fill="#ffffff" stroke="#b5475b" stroke-width="2"/>
+  <text x="150" y="470" text-anchor="middle" font-size="13" font-weight="bold" fill="#b5475b">AWS Secrets Manager</text>
+  <text x="150" y="490" text-anchor="middle" font-size="12" fill="#444">library-db-credentials</text>
+  <text x="150" y="508" text-anchor="middle" font-size="11" fill="#444">DB username + password</text>
+  <path d="M 270 470 C 340 470 340 415 425 415" fill="none" stroke="#7a9ec9" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowGlass)"/>
+  <text x="345" y="440" text-anchor="middle" font-size="10" fill="#666">GetSecretValue</text>
+
+  <!-- ================= Automation ================= -->
+  <text x="1090" y="160" font-size="14" font-weight="bold" fill="#2a5d8f">Automation</text>
+  <rect x="990" y="180" width="200" height="62" rx="8" fill="#ffffff" stroke="#2a5d8f" stroke-width="1.5"/>
+  <text x="1090" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5d8f">Amazon EventBridge</text>
+  <text x="1090" y="224" text-anchor="middle" font-size="11" fill="#555">daily schedule (cron)</text>
+  <text x="1090" y="238" text-anchor="middle" font-size="10" fill="#888">scans due dates</text>
+
+  <rect x="990" y="262" width="200" height="62" rx="8" fill="#ffffff" stroke="#2a5d8f" stroke-width="1.5"/>
+  <text x="1090" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5d8f">AWS Lambda</text>
+  <text x="1090" y="306" text-anchor="middle" font-size="11" fill="#555">due-date reminder</text>
+
+  <rect x="990" y="344" width="200" height="62" rx="8" fill="#ffffff" stroke="#7a3fa0" stroke-width="1.5"/>
+  <text x="1090" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#7a3fa0">Amazon SES</text>
+  <text x="1090" y="388" text-anchor="middle" font-size="11" fill="#555">email notifications</text>
+
+  <line x1="1090" y1="242" x2="1090" y2="262" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1090" y1="324" x2="1090" y2="344" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 1090 368 C 1090 420 900 460 700 460 L 250 460" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="680" y="450" text-anchor="middle" font-size="10" fill="#666">reminder emails to readers</text>
+
+  <!-- ================= CI/CD ================= -->
+  <text x="1090" y="520" font-size="14" font-weight="bold" fill="#8a6d00">CI / CD</text>
+  <rect x="990" y="540" width="200" height="62" rx="8" fill="#ffffff" stroke="#d29922" stroke-width="1.5"/>
+  <text x="1090" y="566" text-anchor="middle" font-size="12" font-weight="bold" fill="#8a6d00">GitHub</text>
+  <text x="1090" y="584" text-anchor="middle" font-size="11" fill="#555">source + Actions</text>
+
+  <rect x="990" y="622" width="200" height="62" rx="8" fill="#ffffff" stroke="#2a5d8f" stroke-width="1.5"/>
+  <text x="1090" y="648" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a5d8f">AWS CodeBuild</text>
+  <text x="1090" y="666" text-anchor="middle" font-size="11" fill="#555">build & test image</text>
+
+  <rect x="990" y="704" width="200" height="62" rx="8" fill="#ffffff" stroke="#5aa469" stroke-width="1.5"/>
+  <text x="1090" y="730" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">Amazon ECR</text>
+  <text x="1090" y="748" text-anchor="middle" font-size="11" fill="#555">library-management</text>
+
+  <line x1="1090" y1="602" x2="1090" y2="622" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1090" y1="684" x2="1090" y2="704" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 990 735 C 760 735 700 460 560 460 C 500 460 500 401 500 401" fill="none" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="760" y="728" text-anchor="middle" font-size="10" fill="#2e7d32">image pull & deploy</text>
+
+  <!-- ================= Monitoring ================= -->
+  <text x="30" y="600" font-size="14" font-weight="bold" fill="#2a5d8f">Monitoring</text>
+  <rect x="30" y="620" width="240" height="80" rx="8" fill="#ffffff" stroke="#2a5d8f" stroke-width="1.5"/>
+  <text x="150" y="650" text-anchor="middle" font-size="13" font-weight="bold" fill="#2a5d8f">Amazon CloudWatch</text>
+  <text x="150" y="670" text-anchor="middle" font-size="11" fill="#555">logs · metrics · alarms</text>
+  <text x="150" y="688" text-anchor="middle" font-size="11" fill="#555">ECS / RDS / Lambda</text>
+
+  <!-- ================= Legend ================= -->
+  <rect x="410" y="520" width="520" height="120" rx="8" fill="#fbfbfb" stroke="#ccc" stroke-width="1"/>
+  <text x="430" y="545" font-size="12" font-weight="bold" fill="#333">Notes</text>
+  <text x="430" y="568" font-size="11" fill="#555">• RDS and ECS Fargate run in private subnets — no public exposure of the database.</text>
+  <text x="430" y="588" font-size="11" fill="#555">• DB credentials are read at runtime from Secrets Manager (never hardcoded in the image).</text>
+  <text x="430" y="608" font-size="11" fill="#555">• Region: ap-southeast-2 (Sydney). Deployment via ECS Fargate + Application Load Balancer.</text>
+  <text x="430" y="628" font-size="11" fill="#555">• EventBridge + Lambda + SES send due-date reminders — serverless, no extra servers.</text>
+</svg>

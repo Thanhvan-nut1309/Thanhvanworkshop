@@ -20,7 +20,7 @@ Mentor hướng dẫn rõ ràng về quyết định kiến trúc, theo dõi ti�
 
 **3. Sự phù hợp giữa công việc và chuyên ngành học**
 
-Dự án capstone phù hợp với ngành **Khoa học máy tính**, đồng thời mở rộng sang serverless, quản lý fleet Spot, GitOps và VPC endpoints — những mảng chưa được đào sâu tại trường. Công việc kết nối lý thuyết với thực hành AWS.
+Dự án capstone phù hợp với ngành **Khoa học máy tính**, đồng thời mở rộng sang triển khai container trên ECS/Fargate, các dịch vụ được quản lý (RDS, S3, Secrets Manager), mạng VPC và CI/CD với GitHub Actions — những mảng chưa được đào sâu tại trường. Công việc kết nối lý thuyết với thực hành AWS.
 
 **4. Cơ hội học hỏi & phát triển kỹ năng**
 
@@ -38,7 +38,7 @@ Lộ trình 5 tuần rõ ràng, deliverable cụ thể (worklog, proposal, works
 
 ### Một số suy ngẫm thêm
 
-**Điều em hài lòng nhất:** Xây dựng hạ tầng end-to-end cho fighting-game — từ EC2 warm pool, S3 hosting đến OIDC, CodeDeploy, async analytics và VPC MatchMaker private — và thấy pipeline GitHub Actions chạy thành công.
+**Điều em hài lòng nhất:** Xây dựng và triển khai toàn bộ Hệ thống quản lý thư viện trên AWS — từ VPC riêng và database được quản lý đến image container trên ECR, Fargate service sau load balancer, và việc phân phối tự động báo cáo này lên GitHub Pages.
 
 **Điều cần cải thiện cho thực tập sinh sau:** Thống nhất vai trò trong team capstone sớm hơn và có checklist tích hợp chung sẽ giảm ma sát ở giai đoạn cuối.
 

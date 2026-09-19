@@ -28,9 +28,9 @@ Chuyên ngành: Cloud Computing
 |---|---|---|
 |1|01/08/2026 –<br>07/08/2026|-<br>Nghe giới thiệu về công ty, nhân sự và các đối tác liên kết.<br>-<br>Tạo tài khoản AWS.<br>-<br>Khám phá một số dịch vụ của AWS.<br>-<br>Thực hành các bài lab cơ bản như tạo EC2, VPC,...|
 |2|08/08/2026 –<br>14/08/2026|-<br>Tiếp tục khám phá các dịch vụ của AWS.<br>-<br>Triển khai thành công các ứng dụng trên AWS.<br>-<br>Thực hành tạo các dịch vụ lưu trữ dữ liệu (S3, DynamoDB).<br>-<br>Giám sát hệ thống qua CloudWatch và thao tác với AWS CLI.|
-|3|15/08/2026 –<br>21/08/2026|-<br>Bắt tay vào làm dự án capstone.<br>-<br>Prototype mô hình cơ bản của dự án.<br>-<br>Hoàn thiện Mô hình dự án và chạy local.<br>-<br>Bắt tay vào làm Authentication với netcode.|
-|4|22/08/2026 –<br>28/08/2026|-<br>Handoff Client với login cho team.<br>-<br>Bắt đầu triển khai CI/CD qua GitHub và GitHub Actions.<br>-<br>Quản lý quyền hạn với IAM Permission Boundaries.<br>-<br>Test khả năng deploy của CodeDeploy.|
-|5|29/08/2026 –<br>04/09/2026|-<br>Hoàn thành đồ án và workshop.<br>-<br>Deploy thành công website báo cáo thực tập.<br>-<br>Viết báo cáo thực tập và bài thu hoạch sự kiện.|
+|3|15/08/2026 –<br>21/08/2026|-<br>Bắt tay vào làm dự án capstone.<br>-<br>Thiết kế kiến trúc và schema database cho Hệ thống quản lý thư viện.<br>-<br>Xây dựng backend (Express + MySQL): auth, quản lý sách, mượn/trả.<br>-<br>Docker hóa ứng dụng và chạy local với Docker Compose.|
+|4|22/08/2026 –<br>28/08/2026|-<br>Xây dựng nền tảng mạng cloud: tạo VPC riêng với public/private subnet.<br>-<br>Cấp phát RDS MySQL, S3 bucket và Secrets Manager.<br>-<br>Chuẩn bị repository ECR và luồng container cho triển khai.|
+|5|29/08/2026 –<br>04/09/2026|-<br>Triển khai backend lên ECS/Fargate sau ALB và kết nối với RDS.<br>-<br>Hoàn thành đồ án và workshop.<br>-<br>Deploy thành công website báo cáo thực tập, viết báo cáo và bài thu hoạch sự kiện.|
 
 
 

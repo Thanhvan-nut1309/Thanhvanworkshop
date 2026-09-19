@@ -16,8 +16,8 @@ pre: " <b> 1. </b> "
 
 **Week 2:** [Exploring AWS services, storage, and monitoring](1.2-week2/)
 
-**Week 3:** [Starting the capstone project — game prototype and model](1.3-week3/)
+**Week 3:** [Starting the capstone project — backend foundation and local development](1.3-week3/)
 
-**Week 4:** [Client handoff, CI/CD, IAM, and CodeDeploy](1.4-week4/)
+**Week 4:** [Building the cloud foundation: VPC, RDS, S3, and Secrets Manager](1.4-week4/)
 
-**Week 5:** [Completing the capstone, workshop, and final report](1.5-week5/)
+**Week 5:** [Deploying on ECS, finalizing the workshop, and delivering the report](1.5-week5/)

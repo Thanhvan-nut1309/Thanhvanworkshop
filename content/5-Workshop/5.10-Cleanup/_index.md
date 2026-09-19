@@ -1,55 +1,37 @@
 ---
 title: "Cleanup"
-date: 2024-01-01
+date: 2026-09-02
 weight: 10
 chapter: false
 pre: " <b> 5.10. </b> "
 ---
 
-After the capstone was deployed and demonstrated, I recorded how the fighting-game stack would be taken down in the correct dependency order. For each AWS resource, I opened the relevant console page and selected delete or terminate.
+After the capstone was deployed and demonstrated, I documented the teardown of the whole stack **in dependency order**, so nothing is left behind and no hourly charges keep accruing (especially the **NAT Gateway**).
 
-The screenshots below follow the sequence I used: application and compute layers first, then API and serverless components, storage, networking, and IAM roles last.
+## Teardown order
 
-![Cleaning up resources](/images/5-Workshop/image39.png)
+| # | Resource | Steps |
+|---|----------|-------|
+| 1 | **ECS service + cluster** | Scale the service to `Desired = 0`, then delete the service; delete cluster `library-cluster`. |
+| 2 | **ALB** | Delete the load balancer (this also removes the listener and target group). |
+| 3 | **ECR repository** | Delete repository `library-management` (delete images first, or force-delete). |
+| 4 | **Amazon RDS** | Delete instance `library-db` (skip final snapshot if not needed) and wait for deletion. |
+| 5 | **Secrets Manager** | Delete secret `library-db-credentials`. |
+| 6 | **Amazon S3** | Empty bucket `library-covers-thanhvan-2026`, then delete it. |
+| 7 | **NAT Gateway** ⚠️ | Delete it first — this is the **hourly-charged** resource. Release any attached Elastic IP. |
+| 8 | **VPC** | Delete `library-vpc` — removes subnets, route tables, internet gateway and the remaining security groups in one action. |
+| 9 | **IAM roles** | Delete `library-ecs-task-role` and any temporary roles created for the task. |
 
-### CodeDeploy
+## Verification
 
-![Delete CodeDeploy application](/images/5-Workshop/image40.png)
+After teardown:
 
-### Auto Scaling Group
+- [ ] **ECS** — no clusters, services or task definitions remaining
+- [ ] **EC2** — no load balancers listed (Check "Load Balancers" under EC2)
+- [ ] **RDS** — no `library-db` instance in any state
+- [ ] **S3** — bucket deleted
+- [ ] **VPC** — `library-vpc` no longer listed
+- [ ] **IAM** — role `library-ecs-task-role` deleted
+- [ ] **Cost Explorer / Billing** — no residual charges from the stack
 
-![Delete ASG](/images/5-Workshop/image41.png)
-
-### EC2 instances
-
-![Delete EC2 instances](/images/5-Workshop/image42.png)
-
-### Launch template
-
-![Delete launch template](/images/5-Workshop/image43.png)
-
-### API Gateway
-
-![Delete API from API Gateway](/images/5-Workshop/image44.png)
-
-### Lambda functions
-
-![Delete Lambda functions](/images/5-Workshop/image45.png)
-
-### DynamoDB tables
-
-![Delete DynamoDB tables](/images/5-Workshop/image46.png)
-
-### S3 bucket
-
-![Emptying S3 bucket](/images/5-Workshop/image47.png)
-
-![Delete S3 bucket](/images/5-Workshop/image48.png)
-
-### VPC
-
-![Delete VPC](/images/5-Workshop/image49.png)
-
-### IAM roles
-
-![Delete IAM roles](/images/5-Workshop/delete-iam-roles.png)
+> The database password and connection details lived only inside Secrets Manager, which is deleted here — so there are no leftover credentials anywhere.

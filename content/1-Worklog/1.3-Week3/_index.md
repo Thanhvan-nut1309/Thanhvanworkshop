@@ -9,8 +9,8 @@ pre: " <b> 1.3. </b> "
 ### Week 3 Objectives:
 
 * Begin the capstone project for the internship.
-* Prototype the basic project model and mechanics.
-* Complete the project model and begin implementing authentication with netcode.
+* Design the application architecture and database schema.
+* Build and run the backend foundation (auth, books, borrow/return) locally.
 
 **Period:** 15/08/2026 – 21/08/2026
 
@@ -19,17 +19,16 @@ pre: " <b> 1.3. </b> "
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | ---------- | --------------- | ------------------ |
 | 2 | - Attend project kickoff: architecture overview, team roles, deliverables <br> - Define project requirements and cloud deployment scope | 17/08/2026 | 17/08/2026 | FCAJ project brief |
-| 3 | - **Prototype:** Build a basic prototype of the project core loop <br> - Iterate on the prototype: inputs, logic, win/lose conditions, UI flow | 18/08/2026 | 18/08/2026 | |
-| 4 | - Migrate prototype logic to the production web project structure <br> - Implement sprites, animations, and input handling | 19/08/2026 | 19/08/2026 | |
-| 5 | - Run and test the project locally; fix rendering and logic issues <br> - Study netcode architecture: WebSocket connections, player slots, state sync | 20/08/2026 | 20/08/2026 | |
-| 6 | - **Sketch:** Begin authentication flow design (login → session → match join) <br> - Integrate initial auth hooks with the netcode module | 21/08/2026 | 21/08/2026 | |
+| 3 | - Set up the `library-management` repository and backend skeleton (Express + MySQL) <br> - Write `schema.sql`: `books`, `users`, `borrow_records` tables | 18/08/2026 | 18/08/2026 | Node.js docs |
+| 4 | - Implement authentication: register/login, JWT, `admin`/`user` roles <br> - Hash passwords before storing | 19/08/2026 | 19/08/2026 | |
+| 5 | - Implement book CRUD with search (title/author/category) <br> - Implement borrow/return: 14-day due date, transaction, stock check | 20/08/2026 | 20/08/2026 | |
+| 6 | - Dockerize the app (`Dockerfile` + `docker-compose.yml`: app + MySQL) <br> - Run and test locally: `/health`, register, borrow, return | 21/08/2026 | 21/08/2026 | Docker docs |
 
 ### Week 3 Achievements:
 
 * Joined the capstone project as an active team member.
-* Built a playable prototype validating the core project loop before investing in cloud infrastructure.
-* Successfully migrated the prototype to the production web stack and ran it locally.
-* Implemented core gameplay features, health logic, and round outcomes.
-* Designed the authentication + netcode integration sketch for team handoff.
-* Understood WebSocket-based multiplayer patterns required for real-time interactions.
-* Prepared the client codebase for team collaboration and CI/CD setup in the following week.
+* Designed the cloud architecture and the relational schema behind the Library Management System.
+* Built the backend foundation: JWT auth, book CRUD + search, borrow/return with a 14-day rule.
+* Containerized the full stack and ran it locally with Docker Compose.
+* Verified the core API flows end-to-end against MySQL on the local machine.
+* Prepared the exact Docker image that would be pushed to ECR and deployed on ECS later.

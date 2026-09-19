@@ -16,8 +16,8 @@ pre: " <b> 1. </b> "
 
 **Tuần 2:** [Khám phá dịch vụ AWS, lưu trữ và giám sát](1.2-week2/)
 
-**Tuần 3:** [Bắt đầu dự án capstone — prototype và mô hình game](1.3-week3/)
+**Tuần 3:** [Bắt đầu dự án capstone — nền tảng backend và phát triển local](1.3-week3/)
 
-**Tuần 4:** [Handoff client, CI/CD, IAM và CodeDeploy](1.4-week4/)
+**Tuần 4:** [Xây dựng nền tảng cloud: VPC, RDS, S3 và Secrets Manager](1.4-week4/)
 
-**Tuần 5:** [Hoàn thành dự án, workshop và báo cáo cuối kỳ](1.5-week5/)
+**Tuần 5:** [Triển khai trên ECS, hoàn thiện workshop và giao báo cáo](1.5-week5/)

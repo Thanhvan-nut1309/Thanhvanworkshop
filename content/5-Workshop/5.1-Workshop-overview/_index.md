@@ -1,6 +1,6 @@
 ---
 title: "Workshop overview"
-date: 2024-01-01
+date: 2026-08-15
 weight: 1
 chapter: false
 pre: " <b> 5.1. </b> "
@@ -8,50 +8,54 @@ pre: " <b> 5.1. </b> "
 
 ## Purpose
 
-This workshop documents the AWS implementation steps for a **live-service fighting game backend**: players authenticate via Cognito, matchmake through API Gateway + Lambda, connect to **EC2 Spot** game servers on port **9000**, and trigger **async analytics** when matches finish.
+This workshop documents the AWS implementation of a **Library Management System (LMS)**: a Node.js/Express backend (JWT auth, book CRUD, search, borrow/return with a 14-day due date) running on **ECS Fargate** behind an **Application Load Balancer**, with **RDS MySQL** in private subnets, **S3** for cover images and **Secrets Manager** for database credentials — plus a serverless **due-date email reminder** pipeline (EventBridge → Lambda → SES).
 
 The architecture follows the proposal flows:
 
 | Flow | Components | My workshop coverage |
 |------|------------|---------------------|
-| **A** | Cognito, S3 assets | S3 static hosting (client bundle) |
-| **R** | API GW, MatchMaker Lambda, DynamoDB, EC2 ASG | Fleet, IAM, VPC private Lambda |
-| **C** | GitHub Actions, CodeDeploy | OIDC, Lambda + EC2 deploy |
-| **E** | DynamoDB Streams, MatchAnalytics Lambda | Async processing setup |
+| **Web requests** | ALB, ECS Fargate, RDS | Foundation, Networking, Application services, Deploy |
+| **Secrets** | Secrets Manager, task role | Application services, Deploy |
+| **Automation** | EventBridge, Lambda, SES | Automation roadmap |
+| **Delivery** | GitHub, CodeBuild, ECR | Containerize, Deploy |
 
-Teammate-owned items (initial Cognito, API Gateway wiring, first MatchMaker Lambda code) are out of scope here.
+Each section was implemented and verified on my own AWS account during the internship.
 
 ## Prerequisites
 
-- AWS account with admin access in `ap-southeast-1`
-- A working game server binary listening on **TCP 9000**
-- GitHub repository: `Thanhvan-nut1309/ThanhVanWorkshop`
-- AWS CLI configured locally (optional, for verification)
+- AWS account with admin access in `ap-southeast-2`
+- Node.js + npm and Docker Desktop for local development
+- GitHub repository: `Thanhvan-nut1309/Thanhvanworkshop`
+- AWS CLI configured locally (optional, for ECR commands)
+- MySQL Workbench (used once for the one-time database migration)
 
 ## Resource naming reference
 
 | Resource | Name / pattern |
 |----------|----------------|
-| EC2 tag | `Role=FightingGameServer` |
-| S3 bucket | `fighting-game-assets-508768431157` |
-| ASG | `FightingGameServerASG` |
-| CodeDeploy (EC2) | `FightingGameServerDeploy` / `FightingGameServer-fleet` |
-| CodeDeploy (Lambda) | `FightingGameMatchmakerDeploy` |
-| DynamoDB | `MatchmakingQueue`, `ActiveMatches`, `MatchAnalytics` |
-| Lambda | `FightingGameMatchmaker`, `FightingGameMatchAnalytics` |
-| Instance profile | `FightingGameServerInstanceRole` |
+| VPC | `library-vpc` (2 public + 2 private subnets) |
+| RDS instance / schema | `library-db` / `library_db` |
+| Database security group | `library-db-sg` |
+| S3 bucket | `library-covers-thanhvan-2026` |
+| Secrets Manager secret | `library-db-credentials` |
+| ECR repository | `library-management` |
+| ECS cluster / task | `library-cluster` / `task-library-management` |
+| IAM task role | `library-ecs-task-role` |
+| ALB | `library-alb` (target group on `/health`, port 3000) |
+| Region / account | `ap-southeast-2` / `367764690039` |
 
 ## Workshop order
 
-Complete sections **5.2 → 5.8** in sequence—later steps depend on earlier IAM, fleet, and networking. Section **5.9** demonstrates the live game client. Section **5.10** is a screenshot-based teardown guide for the internship report (cancel before confirming deletes).
+Complete sections **5.2 → 5.7** in sequence — each step builds on the previous one (foundation → network → services → container → deploy → migration). Section **5.8** documents the automation and monitoring extension designed in the final phase. Section **5.9** verifies the running system end-to-end. Section **5.10** is the dependency-ordered teardown guide.
 
 ## Verification checklist
 
 After all sections:
 
-- [ ] ASG warm pool has healthy instances tagged `Role=FightingGameServer`
-- [ ] S3 website URL loads the browser client
-- [ ] GitHub Actions deploy succeeds via OIDC (no static AWS keys)
-- [ ] CodeDeploy jobs complete for both Lambda and EC2
-- [ ] Finished matches appear in `MatchAnalytics` via stream processing
-- [ ] MatchMaker Lambda runs in private subnets with VPC endpoints (no NAT)
+- [ ] Local Docker stack answers `GET /health` with `{"status":"ok"}`
+- [ ] `library-vpc` shows 2 public + 2 private subnets and an Available state
+- [ ] RDS `library-db` reaches `Available` with `Public access = No`
+- [ ] ECR contains the tagged image `library-management:latest`
+- [ ] ECS service is running and the ALB health check passes (`/health`)
+- [ ] `schema.sql` executed on RDS; tables `books`, `users`, `borrow_records` exist
+- [ ] RDS public access switched back **off** after migration

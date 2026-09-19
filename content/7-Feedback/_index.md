@@ -20,7 +20,7 @@ My mentor provided clear guidance on architecture decisions, reviewed progress r
 
 **3. Relevance of work to academic major**
 
-The capstone backend project aligned well with my **Computer Science** studies while extending into areas not fully covered in coursework — serverless design, Spot fleet management, GitOps, and VPC endpoint networking. The work bridged university theory with production-style AWS practice.
+The capstone backend project aligned well with my **Computer Science** studies while extending into areas not fully covered in coursework — containerized deployment on ECS/Fargate, managed services (RDS, S3, Secrets Manager), VPC networking, and CI/CD with GitHub Actions. The work bridged university theory with production-style AWS practice.
 
 **4. Learning & skill development opportunities**
 
@@ -38,7 +38,7 @@ The structured 5-week timeline, clear deliverables (worklog, proposal, workshop,
 
 ### Additional reflections
 
-**What I found most satisfying:** Building end-to-end infrastructure for the fighting-game project — from EC2 warm pool and S3 hosting through OIDC, CodeDeploy, async analytics, and private MatchMaker VPC — and seeing it deploy successfully via GitHub Actions.
+**What I found most satisfying:** Building and deploying the full stack of the Library Management System on AWS — from the dedicated VPC and managed database through the container image on ECR, the ECS/Fargate service behind the load balancer, and the automated GitHub Pages delivery of this report.
 
 **What could be improved for future interns:** Earlier alignment on capstone team roles and a shared deployment checklist would reduce integration friction in the final weeks.
 

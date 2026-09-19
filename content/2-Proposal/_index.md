@@ -6,17 +6,19 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Serverless & Spot Instance Backend Architecture for Live-Service Games on AWS
+# Cloud-Native Library Management System on AWS
 
-## High-Performance, Scalable, and Cost-Optimized Cloud Infrastructure for Multiplayer Games
+## A Scalable, Secure and Fully Managed Web Application for Managing Books, Readers and Borrowing
 
 ---
 
 ### 1. Executive Summary
 
-This project presents a cloud-native backend architecture designed for live-service multiplayer games on Amazon Web Services (AWS). Instead of maintaining an expensive dedicated server fleet running 24/7 regardless of player demand, this architecture provisions compute resources dynamically **only when actually needed**: during player authentication, matchmaking, and active live game sessions.
+This project presents a cloud-native backend architecture for a **Library Management System (LMS)** built entirely on Amazon Web Services (AWS). The application lets a librarian manage books, readers and borrow records, while readers can browse the catalog, borrow books and track due dates — all through a web interface backed by **Amazon ECS Fargate**, **Amazon RDS for MySQL**, **Amazon S3** and **AWS Secrets Manager**.
 
-All metagame components—including authentication, asset distribution, matchmaking, and post-match analytics—operate on a 100% **Serverless** architecture. The live game server sessions run within an **EC2 Spot Fleet** inside a dedicated, isolated VPC network boundary and are spun up dynamically by the Matchmaker service. Deployments and updates strictly follow **GitOps** practices, ensuring automated, zero-downtime releases without manual code execution on production.
+Instead of running the application on always-on virtual machines, the system runs a containerized **Node.js/Express** backend on **AWS Fargate** (serverless compute for containers) behind an **Application Load Balancer**, with the MySQL database isolated in **private subnets** so it is never exposed to the public internet. The design follows the **least-privilege**, **zero-hardcoded-secret** and **private-network** principles emphasized during the First Cloud AI Journey (FCAJ) internship.
+
+A standout feature is the **automated due-date reminder**: an **Amazon EventBridge** schedule triggers an **AWS Lambda** function every day, which scans borrow records and sends **Amazon SES** emails to readers whose books are about to fall due or are already overdue. This event-driven, serverless piece of automation demonstrates both reliability and near-zero running cost.
 
 ---
 
@@ -24,76 +26,73 @@ All metagame components—including authentication, asset distribution, matchmak
 
 #### What's the Problem?
 
-Traditional multiplayer game server architectures rely on dedicated EC2 instance fleets running continuously 24/7. During off-peak hours or low traffic periods, game studios suffer from massive idle compute costs. Furthermore, manual code deployments present severe operational risks, such as match interruptions, long deployment windows, and complex manual rollbacks. Keeping game server ports permanently open to the internet also exposes infrastructure to security threats and DDoS attacks.
+Small libraries and schools usually manage borrowing with spreadsheets or desktop software. This causes three practical problems:
+
+- **Manual and error-prone tracking** — due dates are computed by hand; overdue books are often forgotten, losing revenue and books.
+- **No reliable access** — the system lives on one machine, cannot be reached by readers outside the building, and has no backup or audit trail.
+- **Hard to scale or maintain** — a traditional always-on server wastes money during quiet hours and makes deployment, upgrades and disaster recovery painful.
 
 #### The Solution
 
-This architecture follows a core design rule: **Serverless for everything except live game sessions**.
+A cloud-native web application with a simple core design rule: **keep the database private, keep credentials out of the code, and automate the boring parts**.
 
-- Low-latency metagame tasks (Auth, Asset Downloads, Matchmaking, Analytics) are handed off to AWS Serverless services (Cognito, API Gateway, Lambda, DynamoDB).
-- Live game sessions run on an EC2 Spot Instance fleet (Graviton ARM64) inside a private/public VPC structure.
-- Access to game servers is protected by dynamic Security Group rules managed by the Matchmaker Lambda, opening ports only for active players during a match and closing them immediately afterwards.
-- Deployment is fully automated via GitHub Actions and AWS CodeDeploy using GitOps principles.
+- A **Node.js/Express** backend (JWT authentication, role-based `admin`/`user`, book CRUD, search, borrow/return with a **14-day due date**) runs in a Docker container on **AWS Fargate**.
+- **MySQL on Amazon RDS** stores relational data (`books`, `users`, `borrow_records`) in **private subnets**, reachable only from the application.
+- **Amazon S3** stores book cover images; **AWS Secrets Manager** stores the database credentials, injected into the application at runtime.
+- A serverless **EventBridge → Lambda → SES** pipeline automatically emails readers about upcoming or overdue due dates — the highlight of the project.
+- **AWS CodeBuild** (with **ECR**) automates image build and push on every commit; **Amazon CloudWatch** monitors logs, metrics and alerts.
 
 #### Benefits and Return on Investment (ROI)
 
-- **Up to 80% Cost Reduction**: Eliminates idle server expenses by using EC2 Spot Instances combined with ARM64 Graviton processors, running compute only when matches occur.
-- **Zero Egress & NAT Costs**: Eliminates NAT Gateway fees by routing internal Lambda traffic to DynamoDB and EC2 APIs via private VPC Endpoints.
-- **Automated Zero-Downtime Deployment**: Blue/Green deployment via CodeDeploy allows gradual traffic shifting and instant rollback if a release fails, preventing match disruptions.
-- **Enhanced Security**: Enforces strict trust boundaries, short-lived scoped IAM credentials for asset downloads, and dynamic Security Group management for game ports.
+- **Always-on availability at near-zero cost**: Fargate scales to zero-friendly pricing; the free-tier RDS instance and serverless components keep the monthly bill in the single digits (USD).
+- **Security by design**: the database has **no public access**, credentials never appear in code or images, and IAM follows least privilege.
+- **Automation that saves real work**: the due-date reminder replaces a manual daily check, and the CI/CD pipeline removes manual deployment steps.
+- **Portable and reproducible**: the whole stack is Dockerized; the same image runs locally, in CI and on AWS.
 
 ---
 
 ### 3. Solution Architecture
 
-The architecture is divided into four distinct execution flows, each featuring its own trigger mechanisms and security trust boundaries.
+![Library Management System architecture](/images/2-Proposal/architecture.svg)
 
-![Live-Service Game Backend Architecture](/images/2-Proposal/architecture.png)
+The architecture is a classic **three-tier web application** hardened with AWS best practices.
 
 #### Architectural Flow Breakdown
 
-##### **Flow C: GitOps Deployment Loop (CI/CD Pipeline)**
+##### **Flow 1: User Request Path (Web)**
 
-- Runs strictly during deployment and never interferes with live, ongoing game sessions.
-- Developers push code and Infrastructure as Code (IaC) to Git. The GitOps pipeline (GitHub Actions) builds artifacts and triggers **AWS CodeDeploy**.
-- CodeDeploy gradually shifts traffic to the new **AWS Lambda** version alias and updates AMI/Launch Templates for the **EC2 Auto Scaling Group (ASG)** Spot fleet.
-- Simultaneously, the pipeline uploads client builds, patches, and server bundles to an **Amazon S3** asset bucket—serving as the unified artifact repository for both clients and EC2 instances.
-- If a deployment error occurs, traffic shifts back automatically without interrupting running matchmaking services.
+- A reader or librarian opens the web app and signs in (JWT issued by the backend, `admin` vs `user` roles).
+- Requests reach the **Application Load Balancer** in the **public subnets** and are forwarded to the **ECS Fargate** container (Node.js/Express, port **3000**) in the **private subnets**.
+- The backend reads/writes **Amazon RDS MySQL (`library_db`)** across tables `books`, `users` and `borrow_records`. Borrowing creates a record with `due_date = borrow_date + 14 days` inside a transaction, checking stock first.
 
-##### **Flow A: Player Auth & Asset Distribution**
+##### **Flow 2: Credential Handling**
 
-- Players log in via **Cognito User Pool** (A1) and receive a JWT (A2).
-- **Cognito Identity Pool** exchanges the JWT for temporary, prefix-scoped IAM credentials (A3).
-- Game clients use these temporary credentials to download assets directly from S3 (A4): client builds, patches, and launcher files.
-- The JWT token is passed to Flow R (A5)—the single intersection point between Auth and Matchmaking—allowing **API Gateway** to authorize incoming requests.
+- No database password is stored in code, images or environment files at rest.
+- At startup, the container calls **AWS Secrets Manager** (secret `library-db-credentials`) via the `library-ecs-task-role` to obtain the connection details.
+- One-time database migration (running `schema.sql`) was performed from a workstation over a temporarily opened (then closed) inbound rule, documented in the workshop.
 
-##### **Flow R: Synchronous Matchmaking & Session Provisioning**
+##### **Flow 3: Automation (Due-Date Reminders)**
 
-- The client sends a matchmaking request via **Amazon CloudFront** (protected by **AWS WAF**) to **Amazon API Gateway** (R1).
-- After Cognito Authorizer validates the JWT, **Matchmaker Lambda** (located in a private subnet) executes (R2):
-  1. Writes match state to **Amazon DynamoDB** via a **VPC Gateway Endpoint** (R4).
-  2. Calls the EC2 control plane via a private **VPC Interface Endpoint** (R3) to request a warm instance from the ASG Spot fleet (G1).
-  3. Assigns a game room and configures dynamic **Security Group** rules specifically for the player's IP address.
-- Matchmaker Lambda returns the server IP and port to the client. The client connects directly to the game instance via **Internet Gateway** (G3).
-- When ASG launches a new EC2 instance, User Data scripts execute at boot, using an **IAM Instance Profile** to pull the latest server binary, config, and patch from S3 (G4). The instance initializes and immediately accepts assigned players.
+- **Amazon EventBridge** runs a **daily cron** rule.
+- **AWS Lambda** queries `borrow_records` for books due within 1–2 days or already overdue, and hands the list to **Amazon SES**.
+- Readers receive reminder emails automatically — fully serverless, no extra servers, virtually free.
 
-##### **Flow E: Asynchronous Post-Match Processing & Analytics**
+##### **Flow 4: Delivery (CI/CD)**
 
-- Once a match concludes, results are written to DynamoDB.
-- **DynamoDB Streams** automatically trigger a background **Lambda function** (E2) to capture post-match logs, calculate player stats, and push events to the analytics store (E3).
-- This flow is completely decoupled from Flow R, ensuring post-match processing never impacts matchmaking latency.
+- Developers push code to **GitHub**; **AWS CodeBuild** builds and tests the Docker image and pushes it to **Amazon ECR** (`library-management`).
+- The ECS service is then updated to the new image revision, giving repeatable, auditable deployments without manual login to servers.
 
 #### AWS Services Used
 
-- **Amazon Cognito**: User Pool (Authentication) & Identity Pool (Authorization / Temp IAM Credentials).
-- **AWS WAF & Amazon CloudFront**: Edge security, DDoS protection, and global request routing.
-- **Amazon API Gateway**: Serverless HTTP API endpoint handling player requests.
-- **AWS Lambda**: Executes Matchmaker logic, CodeDeploy traffic management, and background log processing.
-- **Amazon DynamoDB & DynamoDB Streams**: Single-table design for match state & real-time log capturing.
-- **Amazon EC2 Spot Fleet (Graviton ARM64)**: Cost-effective, high-performance compute fleet for live game sessions.
-- **AWS CodeDeploy & GitHub Actions**: Fully automated GitOps deployment pipeline.
-- **Amazon S3 & AWS KMS**: Centralized asset repository with data-at-rest encryption.
-- **VPC Endpoints (Gateway & Interface)**: Private network connections avoiding public internet egress.
+- **Amazon ECS (Fargate)**: serverless container runtime for the backend application.
+- **Application Load Balancer**: entry point for HTTP(S) traffic, health checks on `/health`.
+- **Amazon RDS for MySQL**: relational storage for `books`, `users`, `borrow_records`.
+- **Amazon S3**: durable storage for book cover images.
+- **AWS Secrets Manager**: secure storage of database credentials.
+- **AWS Lambda + Amazon EventBridge + Amazon SES**: scheduled due-date email reminders (event-driven).
+- **Amazon ECR + AWS CodeBuild**: container registry and CI pipeline.
+- **Amazon CloudWatch**: logs, metrics and alarms.
+- **VPC (public/private subnets) + NAT Gateway**: network isolation and controlled egress.
 
 ---
 
@@ -101,39 +100,45 @@ The architecture is divided into four distinct execution flows, each featuring i
 
 #### Implementation Phases
 
-1. **Phase 1: Architecture & Security Boundary Definition (Month 1)**  
-   Design VPC subnets, route tables, IAM roles, security group automation, and KMS keys.
-2. **Phase 2: Core Serverless Metagame & Auth Setup (Month 1-2)**  
-   Implement Cognito User/Identity Pools, S3 asset bucket policies, API Gateway, and DynamoDB single-table schema.
-3. **Phase 3: Matchmaker & EC2 Spot Automation (Month 2)**  
-   Develop Matchmaker Lambda in private subnets, configure ASG Launch Templates with Graviton ARM64, and create User Data boot scripts.
-4. **Phase 4: GitOps CI/CD & Asynchronous Analytics (Month 3)**  
-   Set up GitHub Actions workflows, CodeDeploy Blue/Green deployment hooks, DynamoDB Streams for post-match processing, and conduct load testing.
+1. **Phase 1: Application Foundation (Week 1–2)**  
+   Build the Node.js/Express backend — JWT auth with `admin`/`user` roles, book CRUD with search, borrow/return API with 14-day due date and stock check — plus `schema.sql` and a `Dockerfile`. Containerize the stack with `docker-compose` (app + MySQL) and verify locally.
+2. **Phase 2: Networking (Week 3)**  
+   Create the `library-vpc` with two public and two private subnets, an Internet Gateway and a NAT Gateway ("Regional") via the VPC wizard.
+3. **Phase 3: Application Services (Week 3–4)**  
+   Provision Amazon RDS MySQL (`library-db`, free tier, private subnet), the S3 covers bucket (`library-covers-thanhvan-2026`), and the Secrets Manager secret (`library-db-credentials`).
+4. **Phase 4: Containerize & Deploy (Week 4–5)**  
+   Push the image to Amazon ECR, create the Fargate cluster, task definition and ALB-backed service, migrate the schema into RDS, and verify end-to-end health.
+5. **Phase 5: Automation, Monitoring & Cleanup (Week 5)**  
+   Design/canary the EventBridge–Lambda–SES reminder pipeline, enable CloudWatch monitoring, document the dependency-ordered teardown, and write up the workshop.
 
 #### Technical Requirements
 
-- **Infrastructure as Code (IaC)**: AWS CDK / Terraform for full environment reproducibility.
-- **Game Server Build**: Dockerized / binary game server compiled for Graviton (ARM64 Linux).
-- **Security Standards**: TLS 1.3 in transit, KMS encryption at rest, principle of least privilege for IAM instance roles and temp user credentials.
+- **Application stack**: Node.js 20 + Express + MySQL (Docker image `node:20-alpine`).
+- **Database**: MySQL 8 — tables `books`, `users`, `borrow_records` (schema in `schema.sql`).
+- **Network**: VPC with public subnets (ALB) and private subnets (ECS + RDS); NAT Gateway for updates and outbound calls.
+- **Secrets**: `USE_SECRETS_MANAGER=true` at runtime; credentials fetched from Secrets Manager, never hardcoded.
+- **Security**: RDS `Public access = No`; database security group restricted; least-privilege IAM task role.
 
 ---
 
 ### 5. Timeline & Milestones
 
-- **Month 1**: System architecture design, VPC/Network topology setup, and IAM security boundaries.
-- **Month 2**: Serverless matchmaking development, Cognito integration, and EC2 Spot ASG automation.
-- **Month 3**: GitOps pipeline implementation, load & stress testing, performance tuning, and final deployment.
+| Week | Milestone |
+| --- | --- |
+| **Week 1–2** | Foundation: working local app (auth, books, borrow/return) in Docker |
+| **Week 3** | VPC created; RDS, S3 bucket and Secrets Manager provisioned |
+| **Week 4** | Image pushed to ECR; ECS Fargate service + ALB live |
+| **Week 5** | Schema migrated to RDS; automation & monitoring designed; cleanup documented; report delivered |
 
 ---
 
 ### 6. Budget Estimation & Cost Optimization
 
-#### Cost Breakdown Highlights
-
-- **Zero Idle Compute**: EC2 instances run ONLY during active matches. Matchmaking and Auth cost fractions of a cent via AWS Lambda & DynamoDB On-Demand.
-- **70-90% Discount via Spot & Graviton**: Graviton ARM64 Spot Instances provide industry-leading price-to-performance ratio for game servers.
-- **Elimination of NAT Gateway Fees**: Matchmaker Lambda communicates with AWS services inside private subnets using free/low-cost VPC Endpoints instead of expensive NAT Gateway data transfer.
-- **Thin AMI Maintenance**: Game binaries and patches are pulled dynamically from S3 at boot time, eliminating the overhead and cost of rebaking AMIs for minor game patches.
+- **Compute**: ECS Fargate billed per vCPU/hour only while running; suitable for a small library's traffic.
+- **Database**: Free-tier RDS MySQL (`db.t3.micro`, 20 GB) fully covers the demo period; billed hourly afterwards.
+- **Serverless**: Lambda and EventBridge cost fractions of a cent per day; SES has a generous free tier for notification volume.
+- **Networking**: NAT Gateway is the only always-on cost (~$0.045/hour) — removed from the account during cleanup after the demo.
+- **Storage**: S3 standard tier for cover images is negligible at this scale.
 
 ---
 
@@ -141,14 +146,17 @@ The architecture is divided into four distinct execution flows, each featuring i
 
 | Risk Item | Impact | Probability | Mitigation Strategy |
 | --- | --- | --- | --- |
-| **Spot Instance Interruption** | Medium | Low | ASG maintains a small warm pool and uses multi-AZ Spot allocation strategies for instant replacement. |
-| **Deployment Failure** | High | Low | AWS CodeDeploy performs gradual traffic shifting with automated rollback if health checks fail. |
-| **Unauthorized Game Access** | High | Low | API Gateway validates JWT tokens; dynamic SG rules restrict game server access solely to authenticated player IPs during match windows. |
+| **RDS left publicly accessible** | High | Low | Public access is toggled off after the one-time migration; verified in console and re-checked at cleanup. |
+| **Expired/lost credentials** | Medium | Low | Credentials live only in Secrets Manager; rotated by recreating the secret; never committed to Git. |
+| **NAT Gateway cost forgotten** | Medium | Medium | Documented in cleanup checklist; alarm on estimated charges via AWS Budgets. |
+| **Container starts but can't reach RDS** | High | Medium | Debugged with environment-variable verification in the task definition (documented in workshop 5.6). |
+| **Email reminder misconfigurations** | Low | Low | SES sandbox limited to verified addresses first, then production access; logs in CloudWatch. |
 
 ---
 
 ### 8. Expected Outcomes
 
-- **Scalable Architecture**: Seamlessly handles spikes from 10 to 10,000+ concurrent players without manual intervention.
-- **Extreme Cost Efficiency**: Reduces operational cloud bills by up to 80% compared to traditional 24/7 dedicated server setups.
-- **Enterprise Security & Reliability**: Enforces strict network boundaries, GitOps deployment safety, and automated post-match analytics processing.
+- **A working, deployable web application** — library staff and readers can browse books, borrow and return items, and receive due-date reminders automatically.
+- **Secure by default** — private database, secrets managed centrally, least-privilege IAM, no public credentials.
+- **Cost-efficient and scalable** — serverless compute and on-demand services keep the bill small while allowing the system to grow with the library.
+- **A learning showcase** — the project demonstrates the full journey taught in FCAJ: networking, containers, managed services, serverless automation, CI/CD and monitoring.

@@ -1,29 +1,29 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-08-01
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Fighting Game AWS Backend — Implementation Workshop
+# Library Management System on AWS — Implementation Workshop
 
-![Workshop screenshots](/images/5-Workshop/image1.png)
+![Workshop architecture](/images/2-Proposal/architecture.svg)
 
-Hands-on steps for the **serverless + EC2 Spot** multiplayer game backend documented in my internship proposal. This section covers the infrastructure and CI/CD work I was responsible for on the [capstone project](https://github.com/Thanhvan-nut1309/ThanhVanWorkshop) repository.
+Hands-on implementation steps for the **cloud-native Library Management System** described in my internship proposal. This section documents the AWS infrastructure I built end-to-end during the internship — from the local application foundation to networking, managed services, container deployment and database migration — on the [capstone project](https://github.com/Thanhvan-nut1309/Thanhvanworkshop) repository.
 
-**Region:** `ap-southeast-1`  
-**Scope:** EC2 warm pool fleet, S3 static client hosting, IAM, GitHub OIDC, CodeDeploy (Lambda + EC2), async match analytics, private MatchMaker VPC, live game demo, and documented teardown.
+**Region:** `ap-southeast-2` (Sydney)  
+**Scope:** local app foundation (Node.js/Express/MySQL), VPC networking, RDS + S3 + Secrets Manager, ECR containerization, ECS Fargate + ALB deployment, database migration, automation roadmap, live demo and documented teardown.
 
 #### Contents
 
 1. [Workshop overview](5.1-Workshop-overview/)
-2. [EC2 game server fleet & warm pool](5.2-EC2-Fleet/)
-3. [S3 static client hosting](5.3-S3-Hosting/)
-4. [IAM roles & policies](5.4-IAM/)
-5. [GitHub OIDC → AWS (CI authentication)](5.5-GitHub-OIDC/)
-6. [CodeDeploy — Lambda & EC2 CI/CD](5.6-CodeDeploy/)
-7. [Async post-match processing](5.7-Async-Processing/)
-8. [VPC — private MatchMaker (no NAT)](5.8-VPC-MatchMaker/)
-9. [Game demo](5.9-Game-Demo/)
+2. [Application foundation — local backend](5.2-Foundation/)
+3. [Networking — VPC `library-vpc`](5.3-Networking/)
+4. [Application services — RDS, S3, Secrets Manager](5.4-Application-Services/)
+5. [Containerize — Amazon ECR](5.5-Containerize/)
+6. [Deploy — ECS Fargate + ALB](5.6-Deploy/)
+7. [Database migration & hardening](5.7-Database-Migration/)
+8. [Automation & monitoring roadmap](5.8-Automation/)
+9. [Live demo & verification](5.9-Live-Demo/)
 10. [Resource cleanup (documented)](5.10-Cleanup/)

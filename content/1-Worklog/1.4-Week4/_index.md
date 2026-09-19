@@ -8,9 +8,9 @@ pre: " <b> 1.4. </b> "
 
 ### Week 4 Objectives:
 
-* Hand off the client with login flow to the team (netcode + auth sketch complete).
-* Implement the CI/CD pipeline using GitHub and GitHub Actions.
-* Implement IAM permission boundaries and validate CodeDeploy deployment capability.
+* Build the cloud networking foundation for the application.
+* Provision the managed data services (RDS, S3, Secrets Manager).
+* Prepare the ECR container flow for deployment.
 
 **Period:** 22/08/2026 – 28/08/2026
 
@@ -18,18 +18,16 @@ pre: " <b> 1.4. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | ---------- | --------------- | ------------------ |
-| 2 | - Finalize client login UI and session handling for team integration <br> - Hand off client codebase with documented auth + netcode interfaces | 24/08/2026 | 24/08/2026 | |
-| 3 | - Set up GitHub repository structure and branching conventions <br> - **CI/CD:** Create initial GitHub Actions workflow for build and deploy | 25/08/2026 | 25/08/2026 | GitHub Actions docs |
-| 4 | - Configure S3 static website hosting for the browser client <br> - Study IAM Permission Boundaries and least-privilege deploy patterns | 26/08/2026 | 26/08/2026 | AWS IAM docs |
-| 5 | - Register GitHub OIDC identity provider in IAM (no long-lived access keys) <br> - Create deploy role with trust policy scoped to the GitHub repo | 27/08/2026 | 27/08/2026 | |
-| 6 | - **Test:** Push to GitHub → verify S3 sync, Lambda update, and CodeDeploy job success | 28/08/2026 | 28/08/2026 | |
+| 2 | - Finalize the architecture and ERD for the Library Management System <br> - Map each AWS service to its role (VPC, RDS, S3, Secrets Manager, ECS) | 24/08/2026 | 24/08/2026 | |
+| 3 | - **VPC:** Create `library-vpc` via the VPC wizard (2 public + 2 private subnets) <br> - Configure Internet Gateway, NAT Gateway (Regional) and S3 Gateway endpoint | 25/08/2026 | 25/08/2026 | AWS VPC docs |
+| 4 | - **RDS:** Create `library-db` MySQL (Free tier, private subnets, `library_db` schema) <br> - Wait and verify the instance reaches `Available` | 26/08/2026 | 26/08/2026 | |
+| 5 | - **S3:** Create bucket `library-covers-thanhvan-2026` for cover images <br> - **Secrets Manager:** create secret `library-db-credentials` linked to RDS | 27/08/2026 | 27/08/2026 | |
+| 6 | - **ECR:** create private repository `library-management` <br> - Verify all resource names and states before deployment | 28/08/2026 | 28/08/2026 | |
 
 ### Week 4 Achievements:
 
-* Delivered a working client handoff package with login flow and netcode stubs for the team.
-* Created the project repository and established branching conventions.
-* Implemented the first GitHub Actions workflow for automated client builds.
-* Created the S3 assets bucket with static website hosting, public-read policy, and CORS configuration.
-* Eliminated static AWS access keys from CI by implementing GitHub OIDC → IAM role authentication.
-* Applied IAM permission boundaries to constrain deploy role capabilities.
-* Verified end-to-end deploy: GitHub push triggers Actions → S3 client sync + CodeDeploy for Lambda and EC2 fleet.
+* Created the dedicated `library-vpc` with clean public/private separation and NAT egress.
+* Provisioned Amazon RDS MySQL (`library-db`) in private subnets with no public access.
+* Created the S3 covers bucket and the `library-db-credentials` secret in Secrets Manager.
+* Created the private ECR repository ready to receive the tested image.
+* Followed least-privilege and private-network principles throughout the setup.
