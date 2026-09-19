@@ -22,12 +22,6 @@ Sau khi capstone đã deploy và demo, em tài liệu hóa quy trình teardown t
 | 8 | **VPC** | Xóa `library-vpc` — kéo theo xóa subnets, route tables, internet gateway và các security group còn lại. |
 | 9 | **IAM roles** | Xóa `library-ecs-task-role` và các role tạm đã tạo cho task. |
 
-### Ảnh cần bổ sung cho phần này
-
-{{< screenshot src="/images/5-Workshop/5.10-Cleanup/service-desired-zero.png" lang="vi" caption="ECS service scale xuống Desired = 0, tasks dừng trước khi xoá service và cluster." >}}
-
-{{< screenshot src="/images/5-Workshop/5.10-Cleanup/no-resources-remain.png" lang="vi" caption="Kiểm chứng sau dọn dẹp: console VPC, RDS, ECS và S3 không còn liệt kê tài nguyên nào tên library-*." >}}
-
 ## Kiểm chứng sau dọn dẹp
 
 - [ ] **ECS** — không còn cluster, service hay task definition

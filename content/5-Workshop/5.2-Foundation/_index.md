@@ -59,14 +59,6 @@ Use `curl.exe` (not the PowerShell `curl` alias) so the `-d` syntax works in bot
 4. Return the book → `status = returned`, copies restored.
 5. Search by title/author/category returns the expected subset.
 
-### Screenshots for this section
-
-{{< screenshot src="/images/5-Workshop/5.2-Foundation/local-health-check.png" lang="en" caption="Docker Compose up output with the app and mysql containers running; browser shows http://localhost:3000/health returning status ok." >}}
-
-{{< screenshot src="/images/5-Workshop/5.2-Foundation/register-api.png" lang="en" caption="Register smoke test: curl POST /api/auth/register returns the new user and a JWT." >}}
-
-{{< screenshot src="/images/5-Workshop/5.2-Foundation/borrow-record.png" lang="en" caption="Borrow API result: borrow_records row with due_date = borrow_date + 14 days and available_copies decremented." >}}
-
 ## Expected outcome
 
 - `GET /health` returns `{"status":"ok"}`

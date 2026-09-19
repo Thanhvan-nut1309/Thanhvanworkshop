@@ -1,58 +1,48 @@
-# WORKSHOP SCREENSHOTS — checklist ảnh thao tác workshop
+# WORKSHOP SCREENSHOTS — danh sách ảnh thao tác workshop
 
-Danh sách toàn bộ ảnh màn hình (screenshot) cần chụp để hoàn thiện phần **5-Workshop**.
-Mỗi ảnh đã được "cắm sẵn" vào đúng trang trong báo cáo (EN + VI) dưới dạng ô màu cam:
-`📸 Ảnh cần bổ sung` / `Screenshot to add`. Với ảnh đã có file, báo cáo **tự động hiển thị ảnh thật**
-(ô placeholder sẽ tự chuyển thành hình khi file tồn tại trong thư mục đúng).
+Danh sách 24 ảnh màn hình (screenshot) đã được gắn vào phần **5-Workshop** (EN + VI)
+thông qua shortcode `{{< screenshot >}}`. Ảnh hiển thị trực tiếp trên trang báo cáo.
 
-> Thư mục đã được tạo sẵn trong `static/images/5-Workshop/`. Chỉ cần đặt file `.png` vào là xong.
-> Trạng thái: ✅ = đã gắn ảnh · ⬜ = chưa có ảnh (vẫn hiện ô placeholder trên trang).
+> Trạng thái: ✅ = đã gắn ảnh (file `.png` tồn tại trong `static/images/5-Workshop/`).
+> 9 placeholder ảnh chưa có file đã được **bỏ khỏi nội dung** (không còn ô "Ảnh cần bổ sung" trên trang).
 
-| # | Thư mục chứa ảnh | Tên file ảnh | Nội dung cần chụp | Trạng thái |
+| # | Thư mục chứa ảnh | Tên file ảnh | Nội dung ảnh | Trạng thái |
 |---|---|---|---|---|
-| 1 | `static/images/5-Workshop/5.2-Foundation/` | `local-health-check.png` | Kết quả `docker compose up` (2 container app + mysql); trình duyệt/curl `http://localhost:3000/health` trả về `{"status":"ok"}` | ⬜ |
-| 2 | `static/images/5-Workshop/5.2-Foundation/` | `register-api.png` | Kết quả curl `POST /api/auth/register` trả về user mới và JWT | ⬜ |
-| 3 | `static/images/5-Workshop/5.2-Foundation/` | `borrow-record.png` | Kết quả mượn sách: bản ghi `borrow_records` có `due_date = ngày mượn + 14 ngày`, `available_copies` giảm | ⬜ |
-| 4 | `static/images/5-Workshop/5.3-Networking/` | `vpc-wizard-config.png` | Màn hình Create VPC (VPC and more): tên `library-vpc`, 2 AZ, 2 public + 2 private subnet, NAT Gateway Regional | ✅ |
-| 5 | `static/images/5-Workshop/5.3-Networking/` | `vpc-created.png` | Trang Your VPCs hiển thị `library-vpc` với State = Available | ✅ |
-| 6 | `static/images/5-Workshop/5.3-Networking/` | `subnets-list.png` | Trang Subnets lọc theo `library-vpc`: 2 public + 2 private subnet | ✅ |
-| 7 | `static/images/5-Workshop/5.3-Networking/` | `db-security-group.png` | Security group `library-db-sg` đã tạo, chưa có inbound rule | ✅ |
-| 8 | `static/images/5-Workshop/5.4-Application-Services/` | `rds-create-config.png` | RDS Create database (Full configuration): Engine MySQL, Free tier, identifier `library-db`, initial database name `library_db` | ✅ |
-| 9 | `static/images/5-Workshop/5.4-Application-Services/` | `rds-available.png` | Console RDS: `library-db` ở trạng thái Available, Public access = No, VPC = `library-vpc` | ✅ |
-| 10 | `static/images/5-Workshop/5.4-Application-Services/` | `s3-bucket-created.png` | Console S3: bucket `library-covers-thanhvan-2026` với Block Public Access bật | ✅ |
-| 11 | `static/images/5-Workshop/5.4-Application-Services/` | `secret-created.png` | Secrets Manager: secret `library-db-credentials` liên kết database `library-db` | ✅ |
-| 12 | `static/images/5-Workshop/5.5-Containerize/` | `ecr-repository.png` | Trang ECR Repositories: repository private `library-management` | ✅ |
-| 13 | `static/images/5-Workshop/5.5-Containerize/` | `docker-login-succeeded.png` | Terminal: lệnh đăng nhập ECR kết thúc bằng `Login Succeeded` | ✅ |
-| 14 | `static/images/5-Workshop/5.5-Containerize/` | `image-pushed.png` | Terminal: `docker push` hoàn tất kèm digest — hoặc console ECR hiển thị image `latest` với sha256 digest | ✅ |
-| 15 | `static/images/5-Workshop/5.6-Deploy/` | `task-role.png` | IAM role `library-ecs-task-role` gắn policy `SecretsManagerReadWrite` | ✅ |
-| 16 | `static/images/5-Workshop/5.6-Deploy/` | `cluster.png` | ECS cluster `library-cluster` với hạ tầng Fargate | ✅ |
-| 17 | `static/images/5-Workshop/5.6-Deploy/` | `task-definition-env.png` | Task definition `task-library-management` với 5 biến môi trường (PORT, USE_SECRETS_MANAGER, AWS_REGION, DB_SECRET_NAME, JWT_SECRET) | ✅ |
-| 18 | `static/images/5-Workshop/5.6-Deploy/` | `service-alb.png` | ECS service + ALB/target group: health check `/health` port 3000, target group healthy | ✅ |
-| 19 | `static/images/5-Workshop/5.6-Deploy/` | `health-alb.png` | Trình duyệt mở `/health` theo DNS name của ALB trả về `{"status":"ok"}` | ✅ |
-| 20 | `static/images/5-Workshop/5.7-Database-Migration/` | `rds-public-yes.png` | RDS Modify: Public access = Yes (Apply immediately) | ⬜ |
-| 21 | `static/images/5-Workshop/5.7-Database-Migration/` | `sg-inbound-3306.png` | `library-db-sg`: inbound rule MySQL/Aurora port 3306 từ My IP | ✅ |
-| 22 | `static/images/5-Workshop/5.7-Database-Migration/` | `workbench-connection.png` | MySQL Workbench: Test Connection tới `library-db.cb826ysqej0o.ap-southeast-2.rds.amazonaws.com` thành công | ⬜ |
-| 23 | `static/images/5-Workshop/5.7-Database-Migration/` | `workbench-schema.png` | MySQL Workbench sau khi chạy `schema.sql`: 3 bảng `books`, `users`, `borrow_records` trong `library_db` | ⬜ |
-| 24 | `static/images/5-Workshop/5.7-Database-Migration/` | `rds-public-reverted.png` | RDS quay lại Public access = No và xoá inbound rule 3306 khỏi `library-db-sg` | ⬜ |
-| 25 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `lambda-function.png` | Lambda `library-due-date-reminder` đã tạo | ✅ |
-| 26 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `eventbridge-rule.png` | EventBridge rule schedule cron `0 1 * * ? *` trỏ tới Lambda | ✅ |
-| 27 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `ses-email.png` | Email nhắc hạn trả nhận được (sách đến hạn 1–2 ngày hoặc quá hạn) | ✅ |
-| 28 | `static/images/5-Workshop/5.9-Live-Demo/` | `register-login.png` | Terminal: register + login qua ALB trả về user và JWT | ✅ |
-| 29 | `static/images/5-Workshop/5.9-Live-Demo/` | `admin-create-book.png` | Admin tạo sách (ví dụ Dế Mèn phiêu lưu ký – Tô Hoài) trả về bản ghi mới | ✅ |
-| 30 | `static/images/5-Workshop/5.9-Live-Demo/` | `borrow-return.png` | Luồng mượn/trả: POST /api/borrow (hạn 14 ngày), GET /api/borrow/me, trả sách → status returned | ✅ |
-| 31 | `static/images/5-Workshop/5.9-Live-Demo/` | `search-results.png` | Kết quả tìm kiếm `GET /api/books?q=tô+hoài` | ✅ |
-| 32 | `static/images/5-Workshop/5.10-Cleanup/` | `service-desired-zero.png` | ECS service scale Desired = 0, tasks dừng trước khi xoá | ⬜ |
-| 33 | `static/images/5-Workshop/5.10-Cleanup/` | `no-resources-remain.png` | Kiểm chứng sau dọn dẹp: VPC / RDS / ECS / S3 không còn tài nguyên `library-*` | ⬜ |
+| 1 | `static/images/5-Workshop/5.3-Networking/` | `vpc-wizard-config.png` | Màn hình Create VPC (VPC and more): tên `library-vpc`, 2 AZ, 2 public + 2 private subnet, NAT Gateway Regional | ✅ |
+| 2 | `static/images/5-Workshop/5.3-Networking/` | `vpc-created.png` | Trang Your VPCs hiển thị `library-vpc` với State = Available | ✅ |
+| 3 | `static/images/5-Workshop/5.3-Networking/` | `subnets-list.png` | Trang Subnets lọc theo `library-vpc`: 2 public + 2 private subnet | ✅ |
+| 4 | `static/images/5-Workshop/5.3-Networking/` | `db-security-group.png` | Security group `library-db-sg` đã tạo, chưa có inbound rule | ✅ |
+| 5 | `static/images/5-Workshop/5.4-Application-Services/` | `rds-create-config.png` | RDS Create database (Full configuration): Engine MySQL, Free tier, identifier `library-db`, initial database name `library_db` | ✅ |
+| 6 | `static/images/5-Workshop/5.4-Application-Services/` | `rds-available.png` | Console RDS: `library-db` ở trạng thái Available, Public access = No, VPC = `library-vpc` | ✅ |
+| 7 | `static/images/5-Workshop/5.4-Application-Services/` | `s3-bucket-created.png` | Console S3: bucket `library-covers-thanhvan-2026` với Block Public Access bật | ✅ |
+| 8 | `static/images/5-Workshop/5.4-Application-Services/` | `secret-created.png` | Secrets Manager: secret `library-db-credentials` liên kết database `library-db` | ✅ |
+| 9 | `static/images/5-Workshop/5.5-Containerize/` | `ecr-repository.png` | Trang ECR Repositories: repository private `library-management` | ✅ |
+| 10 | `static/images/5-Workshop/5.5-Containerize/` | `docker-login-succeeded.png` | Terminal: lệnh đăng nhập ECR kết thúc bằng `Login Succeeded` | ✅ |
+| 11 | `static/images/5-Workshop/5.5-Containerize/` | `image-pushed.png` | Terminal: `docker push` hoàn tất kèm digest — hoặc console ECR hiển thị image `latest` với sha256 digest | ✅ |
+| 12 | `static/images/5-Workshop/5.6-Deploy/` | `task-role.png` | IAM role `library-ecs-task-role` gắn policy `SecretsManagerReadWrite` | ✅ |
+| 13 | `static/images/5-Workshop/5.6-Deploy/` | `cluster.png` | ECS cluster `library-cluster` với hạ tầng Fargate | ✅ |
+| 14 | `static/images/5-Workshop/5.6-Deploy/` | `task-definition-env.png` | Task definition `task-library-management` với 5 biến môi trường (PORT, USE_SECRETS_MANAGER, AWS_REGION, DB_SECRET_NAME, JWT_SECRET) | ✅ |
+| 15 | `static/images/5-Workshop/5.6-Deploy/` | `service-alb.png` | ECS service + ALB/target group: health check `/health` port 3000, target group healthy | ✅ |
+| 16 | `static/images/5-Workshop/5.6-Deploy/` | `health-alb.png` | Trình duyệt mở `/health` theo DNS name của ALB trả về `{"status":"ok"}` | ✅ |
+| 17 | `static/images/5-Workshop/5.7-Database-Migration/` | `sg-inbound-3306.png` | `library-db-sg`: inbound rule MySQL/Aurora port 3306 từ My IP | ✅ |
+| 18 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `lambda-function.png` | Lambda `library-due-date-reminder` đã tạo | ✅ |
+| 19 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `eventbridge-rule.png` | EventBridge rule schedule cron `0 1 * * ? *` trỏ tới Lambda | ✅ |
+| 20 | `static/images/5-Workshop/5.8-Automation/` *(tùy chọn)* | `ses-email.png` | Email nhắc hạn trả nhận được (sách đến hạn 1–2 ngày hoặc quá hạn) | ✅ |
+| 21 | `static/images/5-Workshop/5.9-Live-Demo/` | `register-login.png` | Terminal: register + login qua ALB trả về user và JWT | ✅ |
+| 22 | `static/images/5-Workshop/5.9-Live-Demo/` | `admin-create-book.png` | Admin tạo sách (ví dụ Dế Mèn phiêu lưu ký – Tô Hoài) trả về bản ghi mới | ✅ |
+| 23 | `static/images/5-Workshop/5.9-Live-Demo/` | `borrow-return.png` | Luồng mượn/trả: POST /api/borrow (hạn 14 ngày), GET /api/borrow/me, trả sách → status returned | ✅ |
+| 24 | `static/images/5-Workshop/5.9-Live-Demo/` | `search-results.png` | Kết quả tìm kiếm `GET /api/books?q=tô+hoài` | ✅ |
 
 ## Tổng kết
-- ✅ **24/33** ảnh đã được gắn từ thư mục `E:\ảnh aws` (17/09/2026).
-- ⬜ **9 ảnh còn thiếu** (3 ảnh phần 5.2-Foundation, 4 ảnh phần 5.7-Database-Migration, 2 ảnh phần 5.10-Cleanup) — trang vẫn hiện ô placeholder màu cam hướng dẫn chụp gì.
 
-## Quy trình sau khi bổ sung ảnh còn thiếu
+- ✅ **24/24** ảnh đã gắn, từ thư mục `E:\ảnh aws` (17/09/2026).
+- Đã **bỏ tất cả placeholder** của 9 ảnh chưa chụp (3 ảnh 5.2-Foundation, 4 ảnh 5.7-Database-Migration, 2 ảnh 5.10-Cleanup) — trang không còn ô "Ảnh cần bổ sung".
 
-1. Đặt từng file `.png` đúng tên, đúng thư mục trong `static/images/5-Workshop/<thư mục>/`.
-2. `git add -A && git commit -m "Add workshop screenshots"`.
-3. `git push origin main` — GitHub Actions tự build lại; ảnh hiện trên
-   https://Thanhvan-nut1309.github.io/Thanhvanworkshop/5-workshop/ mà không cần sửa markdown.
+## Nếu muốn thêm ảnh về sau
+
+1. Chụp ảnh, đặt file `.png` đúng tên vào `static/images/5-Workshop/<thư mục>/`.
+2. Chèn dòng shortcode vào đoạn tương ứng trong `content/5-Workshop/<thư mục>/_index.md` và `_index.vi.md`:
+   `{{< screenshot src="/images/5-Workshop/<thư mục>/<ten-file>.png" lang="en|vi" caption="Mô tả ảnh" >}}`
+3. `git add -A && git commit -m "..." && git push origin main` — GitHub Actions tự build và deploy.
 
 > Lưu ý bảo mật: ảnh chụp console AWS có thể lộ **Account ID** (367764690039) — báo cáo đã công khai nội dung này, OK. Chú ý **che mật khẩu** RDS/đăng nhập nếu vô tình xuất hiện trong ảnh terminal.
