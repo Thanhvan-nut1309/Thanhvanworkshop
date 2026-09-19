@@ -24,7 +24,7 @@ Dự án capstone phù hợp với ngành **Khoa học máy tính**, đồng th�
 
 **4. Cơ hội học hỏi & phát triển kỹ năng**
 
-Ngoài capstone, em học thêm qua **FCAJ Community Day**, workshop lab, xuất bản báo cáo Hugo và xử lý sự cố CI/CD. Các trải nghiệm này nâng cao cả chiều sâu kỹ thuật lẫn kỹ năng viết báo cáo.
+Ngoài capstone, em học thêm qua **community meetup**, workshop lab, xuất bản báo cáo Hugo và xử lý sự cố CI/CD. Các trải nghiệm này nâng cao cả chiều sâu kỹ thuật lẫn kỹ năng viết báo cáo.
 
 **5. Văn hóa & tinh thần đồng đội**
 

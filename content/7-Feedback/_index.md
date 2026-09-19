@@ -24,7 +24,7 @@ The capstone backend project aligned well with my **Computer Science** studies w
 
 **4. Learning & skill development opportunities**
 
-Beyond the capstone, I gained practical skills through **FCAJ Community Day** events, workshop labs, Hugo report publishing, and hands-on troubleshooting of CI/CD pipelines. These experiences improved both technical depth and professional reporting habits.
+Beyond the capstone, I gained practical skills through **community meetups**, workshop labs, Hugo report publishing, and hands-on troubleshooting of CI/CD pipelines. These experiences improved both technical depth and professional reporting habits.
 
 **5. Company culture & team spirit**
 
