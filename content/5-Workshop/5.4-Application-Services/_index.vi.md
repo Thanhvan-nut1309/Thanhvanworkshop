@@ -41,7 +41,7 @@ Dựng ba **dịch vụ dữ liệu managed** mà ứng dụng phụ thuộc: **
 5. **Automatic rotation:** giữ `Disable` (không cần cho workshop).
 6. **Store**, rồi copy **Secret ARN** — dùng khi cấu hình ECS task definition ([5.6](5.6-Deploy/)).
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.4-Application-Services/rds-create-config.png" lang="vi" caption="Màn hình RDS Create database (Full configuration): Engine MySQL, Free tier, identifier library-db, initial database name library_db." >}}
 

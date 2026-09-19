@@ -41,7 +41,7 @@ curl.exe -X POST http://localhost:3000/api/books -H "Authorization: Bearer <admi
 
 `GET /api/books?q=tô+hoài` → lọc theo tên/tác giả/thể loại.
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.9-Live-Demo/register-login.png" lang="vi" caption="Terminal: register và login qua ALB trả về user đã tạo và JWT." >}}
 

@@ -42,7 +42,7 @@ Nạp `schema.sql` vào **RDS** (các bảng `books`, `users`, `borrow_records`)
 
 > Đừng bỏ qua bước này. Cửa sổ public chỉ tồn tại để migrate; để mở sẽ lộ database ra internet.
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.7-Database-Migration/sg-inbound-3306.png" lang="vi" caption="Inbound rules của library-db-sg: MySQL/Aurora port 3306 từ My IP." >}}
 

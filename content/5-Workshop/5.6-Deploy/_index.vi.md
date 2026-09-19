@@ -53,7 +53,7 @@ Chạy backend trong container trên **Amazon ECS với AWS Fargate** (compute s
 
 Mở **ALB DNS name** trong trình duyệt (vd `http://library-alb-....elb.amazonaws.com/health`). Kết quả khỏe mạnh là `{"status":"ok"}`.
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.6-Deploy/task-role.png" lang="vi" caption="Console IAM: role library-ecs-task-role gắn policy SecretsManagerReadWrite." >}}
 

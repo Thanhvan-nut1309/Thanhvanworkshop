@@ -32,7 +32,7 @@ Vào **Your VPCs** thấy `library-vpc` với **State = Available**, và **Subne
 2. VPC: `library-vpc`.
 3. Chưa thêm inbound rule — rule MySQL inbound chỉ mở ngắn hạn lúc migrate schema một lần ([5.7](5.7-Database-Migration/)), sau đó gỡ bỏ.
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.3-Networking/vpc-wizard-config.png" lang="vi" caption="Màn hình Create VPC (VPC and more): tên library-vpc, 2 AZ, 2 public + 2 private subnet, NAT Gateway Regional." >}}
 

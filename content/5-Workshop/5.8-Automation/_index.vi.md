@@ -60,7 +60,7 @@ for (const r of due) {
 
 Nối deploy vào tự động hóa: **GitHub → AWS CodeBuild → Amazon ECR → ECS** để mỗi lần `git push` lên `main` tự build và redeploy image `library-app` (cùng pattern đã dùng để deploy site báo cáo này bằng GitHub Actions + GitHub Pages).
 
-### Ảnh cần bổ sung cho phần này (tùy chọn — nếu bạn triển khai pipeline)
+### Ảnh minh hoạ cho phần này (tùy chọn — nếu bạn triển khai pipeline)
 
 {{< screenshot src="/images/5-Workshop/5.8-Automation/lambda-function.png" lang="vi" caption="Console Lambda: hàm library-due-date-reminder đã tạo." >}}
 

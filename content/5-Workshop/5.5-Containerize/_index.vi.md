@@ -48,7 +48,7 @@ Dòng cuối báo digest và dung lượng image — image đã nằm trong ECR.
 
 Trong **ECR → Repositories → library-management**, image `latest` xuất hiện với `sha256` digest khớp với bản build local.
 
-### Ảnh cần bổ sung cho phần này
+### Ảnh minh hoạ cho phần này
 
 {{< screenshot src="/images/5-Workshop/5.5-Containerize/ecr-repository.png" lang="vi" caption="Trang ECR Repositories hiển thị repository private library-management." >}}
 
