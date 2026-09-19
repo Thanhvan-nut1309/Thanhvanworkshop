@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 4. </b> "
 ---
 
-During my internship, I participated in three events organized by AWS Vietnam and the AWS First Cloud AI Journey (FCAJ) community. Each event connected classroom learning with industry perspectives on cloud architecture, AI, and career development.
+During my internship, I participated in three events organized by the AWS Vietnam community and the AWS First Cloud AI Journey (FCAJ) community. Each event connected classroom learning with industry perspectives on cloud architecture, AI, and career development.
 
 ### [Event 1](4.1-Event1/)  
 &emsp;**Event name:** AWS Enterprise Cloud Architectures & Industry Application — Swinburne Vietnam Study Tour  
@@ -35,12 +35,12 @@ During my internship, I participated in three events organized by AWS Vietnam an
 ---
 
 ### [Event 3](4.3-Event3/)  
-&emsp;**Event name:** FCAJ Community Day  
+&emsp;**Event name:** AWS Vietnam Community Meetup  
 
-&emsp;**Date & time:** 27 June 2026  
+&emsp;**Date & time:** Saturday 25 July 2026 · 08:30 – 12:00  
 
-&emsp;**Location:** FCAJ venue  
+&emsp;**Location:** AWS Hanoi — Grand Terra Tower, 36 Cát Linh, Đống Đa  
 
 &emsp;**Role:** Attendee  
 
-&emsp;**Summary:** Sessions on CloudThinker agentic operations, Vietnamese voice AI (R AI), AWS DevOps Agent, Amazon Quick for HR, and secure private MCP integration for enterprise Quick.
+&emsp;**Summary:** Community meetup with a community update and talks on OpenClaw open-source AI agents, from AI trends to business value, shipping fast with AI, and selecting the right AI agent pattern on AWS — plus tea break & networking, Kahoot quiz and lucky draw.
