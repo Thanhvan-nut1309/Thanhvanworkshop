@@ -53,8 +53,6 @@ A cloud-native web application with a simple core design rule: **keep the databa
 
 ### 3. Solution Architecture
 
-![Library Management System architecture](/images/2-Proposal/architecture.svg)
-
 The architecture is a classic **three-tier web application** hardened with AWS best practices.
 
 #### Runtime Request-Flow Diagram

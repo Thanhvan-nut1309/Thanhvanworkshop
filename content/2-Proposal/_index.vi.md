@@ -53,8 +53,6 @@ Các thư viện nhỏ, trường học thường quản lý mượn/trả bằn
 
 ### 3. Kiến trúc giải pháp
 
-![Kiến trúc Hệ thống quản lý thư viện](/images/2-Proposal/architecture.svg)
-
 Kiến trúc là một ứng dụng web **ba lớp** điển hình, được củng cố theo best practice của AWS.
 
 #### Sơ đồ luồng runtime (Request Flow)

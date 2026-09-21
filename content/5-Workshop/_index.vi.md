@@ -8,8 +8,6 @@ pre: " <b> 5. </b> "
 
 # Workshop: Hệ thống quản lý thư viện trên AWS — Triển khai thực tế
 
-![Kiến trúc workshop](/images/2-Proposal/architecture.svg)
-
 Các bước triển khai thực tế cho **Hệ thống quản lý thư viện cloud-native** đã mô tả trong proposal thực tập. Phần này ghi lại toàn bộ hạ tầng AWS em tự xây dựng trong kỳ thực tập — từ nền tảng ứng dụng local đến mạng, dịch vụ managed, triển khai container và migrate database — trên dự án [capstone](https://github.com/Thanhvan-nut1309/Thanhvanworkshop).
 
 **Region:** `ap-southeast-2` (Sydney)  

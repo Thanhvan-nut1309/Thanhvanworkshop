@@ -8,8 +8,6 @@ pre: " <b> 5. </b> "
 
 # Library Management System on AWS — Implementation Workshop
 
-![Workshop architecture](/images/2-Proposal/architecture.svg)
-
 Hands-on implementation steps for the **cloud-native Library Management System** described in my internship proposal. This section documents the AWS infrastructure I built end-to-end during the internship — from the local application foundation to networking, managed services, container deployment and database migration — on the [capstone project](https://github.com/Thanhvan-nut1309/Thanhvanworkshop) repository.
 
 **Region:** `ap-southeast-2` (Sydney)  
