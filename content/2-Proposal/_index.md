@@ -57,6 +57,31 @@ A cloud-native web application with a simple core design rule: **keep the databa
 
 The architecture is a classic **three-tier web application** hardened with AWS best practices.
 
+#### Runtime Request-Flow Diagram
+
+![Runtime request flow of the Library Management System](/images/2-Proposal/runtime-request-flow.png)
+
+This diagram shows the **runtime request path** of the system, step by step:
+
+1. A reader or librarian opens the web app in a browser and signs in. The frontend is served from **Amazon S3 + CloudFront**, and API calls are routed over HTTPS.
+2. Each API request first hits the **Application Load Balancer** in the **public subnets** of the VPC, which terminates the connection and performs the `/health` health check.
+3. The ALB forwards the request to the **Node.js/Express container running on ECS Fargate** (port 3000) inside the **private subnets**.
+4. The backend authenticates the user (JWT, `admin`/`user` roles) and reads/writes **Amazon RDS MySQL (`library_db`)** — `books`, `users`, `borrow_records` — always remaining within the private network.
+5. Database credentials are **not hardcoded**: at startup the container calls **AWS Secrets Manager** (`library-db-credentials`) using the `library-ecs-task-role`, and book cover images are loaded from **Amazon S3**.
+6. Every request is captured by **Amazon CloudWatch** (application logs, metrics) for monitoring and troubleshooting.
+
+#### Automation & Monitoring Diagram
+
+![Automation and monitoring architecture of the Library Management System](/images/2-Proposal/automation-monitoring-architecture.png)
+
+This diagram covers the **event-driven automation** and **observability** layers built on top of the running system:
+
+1. **Automation — due-date reminders:** an **Amazon EventBridge** rule fires on a **daily cron schedule**, invoking the **AWS Lambda** function `library-due-reminder`.
+2. The Lambda function reads the database credentials from **AWS Secrets Manager**, then scans **Amazon RDS** `borrow_records` for books due within 1–2 days or already overdue, and builds the recipient list.
+3. For each reader in the list, the Lambda calls **Amazon SES** to send the reminder email — completely serverless and nearly free.
+4. **Monitoring:** **Amazon CloudWatch** collects logs and metrics from ECS, Lambda and the ALB; **CloudWatch Alarms** notify when CPU or error rates exceed thresholds.
+5. **CI/CD (optional extension):** a push to **GitHub** triggers **AWS CodeBuild** to rebuild the Docker image and push it to **Amazon ECR**, after which the ECS service rolls to the new revision automatically.
+
 #### Architectural Flow Breakdown
 
 ##### **Flow 1: User Request Path (Web)**

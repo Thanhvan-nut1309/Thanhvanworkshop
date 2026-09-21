@@ -57,6 +57,31 @@ Các thư viện nhỏ, trường học thường quản lý mượn/trả bằn
 
 Kiến trúc là một ứng dụng web **ba lớp** điển hình, được củng cố theo best practice của AWS.
 
+#### Sơ đồ luồng runtime (Request Flow)
+
+![Luồng runtime của Hệ thống quản lý thư viện](/images/2-Proposal/runtime-request-flow.png)
+
+Sơ đồ này mô tả **đường đi của một yêu cầu** trong lúc hệ thống chạy thực tế, từng bước:
+
+1. Độc giả/thủ thư mở ứng dụng web trong trình duyệt và đăng nhập. Frontend được phục vụ từ **Amazon S3 + CloudFront**, các lệnh gọi API được định tuyến qua HTTPS.
+2. Mỗi yêu cầu API đi qua **Application Load Balancer** trong **public subnet** của VPC — nơi tiếp nhận kết nối và thực hiện health check tại `/health`.
+3. ALB chuyển yêu cầu tới **container Node.js/Express trên ECS Fargate** (cổng 3000) nằm trong **private subnet**.
+4. Backend xác thực người dùng (JWT, phân quyền `admin`/`user`) rồi đọc/ghi **Amazon RDS MySQL (`library_db`)** — `books`, `users`, `borrow_records` — luôn nằm trong mạng riêng.
+5. Thông tin đăng nhập database **không bị hardcode**: khi khởi động, container gọi **AWS Secrets Manager** (`library-db-credentials`) qua role `library-ecs-task-role`, còn ảnh bìa sách được lấy từ **Amazon S3**.
+6. Mọi yêu cầu được **Amazon CloudWatch** ghi lại (log ứng dụng, metric) phục vụ giám sát và xử lý sự cố.
+
+#### Sơ đồ tự động hóa & giám sát
+
+![Kiến trúc tự động hóa và giám sát của hệ thống](/images/2-Proposal/automation-monitoring-architecture.png)
+
+Sơ đồ này mô tả các lớp **tự động hóa hướng sự kiện** và **giám sát** được xây trên nền hệ thống đang chạy:
+
+1. **Tự động hóa — nhắc hạn trả:** **Amazon EventBridge** chạy rule **cron hằng ngày**, kích hoạt hàm **AWS Lambda** `library-due-reminder`.
+2. Hàm Lambda đọc credential database từ **AWS Secrets Manager**, quét **Amazon RDS** `borrow_records` tìm sách sắp hạn (1–2 ngày) hoặc quá hạn, rồi lập danh sách người nhận.
+3. Với mỗi độc giả trong danh sách, Lambda gọi **Amazon SES** gửi email nhắc hạn — hoàn toàn serverless và gần như miễn phí.
+4. **Giám sát:** **Amazon CloudWatch** thu thập log và metric từ ECS, Lambda và ALB; **CloudWatch Alarms** cảnh báo khi CPU hoặc tỷ lệ lỗi vượt ngưỡng.
+5. **CI/CD (mở rộng tùy chọn):** mỗi lần push lên **GitHub**, **AWS CodeBuild** build lại image Docker và đẩy lên **Amazon ECR**, sau đó service ECS tự động chuyển sang bản revision mới.
+
 #### Các luồng kiến trúc
 
 ##### **Luồng 1: Đường đi yêu cầu người dùng (Web)**
